@@ -11,28 +11,6 @@
         android:orientation="horizontal"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp">
-
-        <Button
-            android:id="@+id/button_first_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="이전" />
-
-        <TextView
-            android:id="@+id/year_first_month"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:textSize="8pt" />
-
-        <Button
-            android:id="@+id/button_first_next"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:text="다음" />
-
     </FrameLayout>
 
 
