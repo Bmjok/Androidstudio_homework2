@@ -5,10 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,17 +17,11 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, new First_Fragment());
+        fragmentTransaction.add(R.id.fragment_container, new MonthFragment());
         fragmentTransaction.commit();
 
         Calendar cal = Calendar.getInstance();
 
-    }
-
-    public void onTitleSelected(int year, int month, int day, View view) {
-
-        Toast.makeText(getApplicationContext(),"position="+day,Toast.LENGTH_SHORT).show();
-        //아직 수정중
     }
 
 }
