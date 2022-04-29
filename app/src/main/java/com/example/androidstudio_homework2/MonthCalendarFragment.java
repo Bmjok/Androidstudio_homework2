@@ -22,22 +22,21 @@ public class MonthCalendarFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
-    private static final String ARG_PARAM3 = "day";
 
     private int year;
     private int month;
-    public int day;
 
     public MonthCalendarFragment() {
 
     }
 
-    public static MonthCalendarFragment newInstance(int year, int month, int day) {
+    public static MonthCalendarFragment newInstance(int year, int month) {
+        //매개변수로 년도와 월을 받음
         MonthCalendarFragment fragment = new MonthCalendarFragment();
+        Calendar.getInstance().set(year, month, 1);
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, year);
         args.putInt(ARG_PARAM2, month);
-        args.putInt(ARG_PARAM3, day);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,9 +50,6 @@ public class MonthCalendarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
 
         View rootView = inflater.inflate(R.layout.fragment_monthcalendar,
                 container, false);

@@ -17,21 +17,17 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity
         implements MonthCalendarFragment.OnTitleSelectedListener{
     Calendar cal; //달력 받아오기
-    private String month_year;
+    int year = 0;
+    int month = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //간단 날짜 불러오기 everyshare.tistory.com/3 [에브리셰어]
-        SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월");
-        String date = format.format(Calendar.getInstance().getTime());
-
         //액션바 타이틀 변경: https://onlyfor-me-blog.tistory.com/196
         ActionBar ab = getSupportActionBar();
-        month_year = date;
-        ab.setTitle(month_year);
+        ab.setTitle("날짜수정");
 
         //기본화면(초기화면) -> 월 달력으로 설정
         FragmentManager fragmentManager = getSupportFragmentManager();
