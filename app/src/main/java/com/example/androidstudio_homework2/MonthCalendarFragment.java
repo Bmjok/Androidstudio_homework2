@@ -58,7 +58,7 @@ public class MonthCalendarFragment extends Fragment {
 
         //액션바 타이틀 변경(setTitle()메소드): https://onlyfor-me-blog.tistory.com/196
         ActionBar ab = ((MainActivity) getActivity()).getSupportActionBar();
-        ab.setTitle(year+"년 "+(month+1)+"월");
+        ab.setTitle(year+"년"+(month+1)+"월");
         //******** 이대로 두면 안되고, 이동하면 날짜가 바뀌게 수정해야함
 
     }
