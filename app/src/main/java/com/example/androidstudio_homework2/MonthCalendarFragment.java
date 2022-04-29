@@ -3,6 +3,7 @@ package com.example.androidstudio_homework2;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -44,6 +46,11 @@ public class MonthCalendarFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //액션바 타이틀 변경(setTitle()메소드): https://onlyfor-me-blog.tistory.com/196
+        ((MainActivity) getActivity()).setTitle(year+"년 "+month+"월");
+        //******** 이대로 두면 안되고, 이동하면 날짜가 바뀌게 수정해야함
+        //날짜가 현재는 0년 0월로 뜸
 
     }
 
