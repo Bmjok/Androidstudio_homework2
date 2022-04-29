@@ -39,11 +39,12 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
         return super.onCreateOptionsMenu(menu);
     }
 
+    //오버플로우 메뉴
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_month:
-                //액션바 월 선택 -> 월 달력 출력
+                //월 선택 -> 월 달력 출력
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, new MonthFragment());
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
                 //MonthFragment 불러오기
                 return true;
             case R.id.action_week:
-                //액션바 주 선택 -> 주 달력 출력
+                //주 선택 -> 주 달력 출력
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, new WeekFragment());
