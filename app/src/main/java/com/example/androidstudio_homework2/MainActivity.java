@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance(); //달력 받아오기
 
     }
 
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
         Toast.makeText(getApplicationContext(), "position"+i, Toast.LENGTH_SHORT).show();
     }
 
+    //앱바
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
                 //액션바 주 선택 -> 주 달력 출력
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new WeekFragment()); //이름대강정함
+                fragmentTransaction.replace(R.id.fragment_container, new WeekFragment());
                 fragmentTransaction.commit();
                 //WeekFragment 불러오기
                 return true;
