@@ -12,9 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
-public class CalendarFragment extends Fragment {
+public class MonthCalendarFragment extends Fragment {
 
-    public CalendarFragment() {
+    public MonthCalendarFragment() {
 
     }
 
