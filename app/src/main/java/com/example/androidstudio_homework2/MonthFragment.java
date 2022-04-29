@@ -3,31 +3,34 @@ package com.example.androidstudio_homework2;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.Calendar;
 
 public class MonthFragment extends Fragment {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "index";
-    private int mIndex;
+    Calendar cal = Calendar.getInstance();
+    private static final String ARG_PARAM1 = "year";
+    private static final String ARG_PARAM2 = "month";
+
+    private int year;
+    private int month;
+    private FragmentActivity fragmentActivity;
 
     public MonthFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param index selected position in the ListView.
-     * @return A new instance of fragment MonthFragment.
-     */
-    public static MonthFragment newInstance(int index) {
-        MonthFragment fragment = new MonthFragment();
+    public static MonthCalendarFragment newInstance(int year, int month) {
+        MonthCalendarFragment fragment = new MonthCalendarFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, index);
+        args.putInt(ARG_PARAM1, year);
+        args.putInt(ARG_PARAM2, month);
         fragment.setArguments(args);
         return fragment;
     }
@@ -35,21 +38,19 @@ public class MonthFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mIndex = getArguments().getInt(ARG_PARAM1);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        FragmentStateAdapter adapter = new MonthVPAdapter(fragmentActivity);
+
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_month, container, false);
-        TextView tv = (TextView)view.findViewById(R.id.textview);
+        View rootView = inflater.inflate(R.layout.fragment_month, container, false);
 
-        if (mIndex >=0)
-            tv.setText(Shakespeare.DIALOGUE[mIndex]);
-
-        return view;
+        return rootView;
     }
 }
