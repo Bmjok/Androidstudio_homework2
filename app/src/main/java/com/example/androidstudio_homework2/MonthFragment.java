@@ -1,9 +1,5 @@
 package com.example.androidstudio_homework2;
 
-import static java.util.Calendar.DAY_OF_WEEK;
-import static java.util.Calendar.MONTH;
-
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,11 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-
-import java.util.Calendar;
 
 public class MonthFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +22,7 @@ public class MonthFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param index selected position in the ListView.
-     * @return A new instance of fragment DetailsFragment.
+     * @return A new instance of fragment MonthFragment.
      */
     public static MonthFragment newInstance(int index) {
         MonthFragment fragment = new MonthFragment();

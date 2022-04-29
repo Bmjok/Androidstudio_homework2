@@ -1,4 +1,4 @@
 package com.example.androidstudio_homework2;
 
-public class CalendarAdapter {
+public class MonthAdapter {
 }
