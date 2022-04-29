@@ -1,5 +1,6 @@
 package com.example.androidstudio_homework2;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements MonthCalendarFragment.OnTitleSelectedListener{
@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
         setContentView(R.layout.activity_main);
 
         Calendar cal = Calendar.getInstance(); //달력 받아오기
+
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle("날짜출력");
 
     }
 
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
             default:
                 return super.onOptionsItemSelected(item);
         }
+
     }
 
 }
