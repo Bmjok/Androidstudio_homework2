@@ -17,8 +17,8 @@ import java.util.Calendar;
 
 public class MonthCalendarFragment extends Fragment {
     //MonthCalendarFragment <-> MonthCalendarAdapter
-    ArrayList<MonthCalendarAdapter> days = new ArrayList<MonthCalendarAdapter>();
-    Calendar cal = Calendar.getInstance();
+    ArrayList<String> days = new ArrayList<String>();
+    Calendar cal;
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
@@ -59,7 +59,7 @@ public class MonthCalendarFragment extends Fragment {
                 container, false);
         GridView gridView = rootView.findViewById(R.id.gridview);
         gridView.setAdapter(
-                new ArrayAdapter<MonthCalendarAdapter>(
+                new ArrayAdapter<String>(
                         getActivity(),
                         android.R.layout.simple_list_item_activated_1,
                         days)); //데이터 추가 필요함 ******************

@@ -11,18 +11,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements MonthCalendarFragment.OnTitleSelectedListener{
+public class MainActivity extends AppCompatActivity
+        implements MonthCalendarFragment.OnTitleSelectedListener{
+    Calendar cal; //달력 받아오기
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Calendar cal = Calendar.getInstance(); //달력 받아오기
+        //액션바 타이틀 변경: https://onlyfor-me-blog.tistory.com/196
         ActionBar ab = getSupportActionBar();
-        ab.setTitle("날짜출력");
+        ab.setTitle(date);
 
         //기본화면(초기화면) -> 월 달력으로 설정
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -30,6 +33,13 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
         fragmentTransaction.add(R.id.fragment_container, new MonthCalendarFragment());
         fragmentTransaction.commit();
 
+    }
+
+    private String month_year(Calendar cal) {
+        //간단 날짜 불러오기 everyshare.tistory.com/3 [에브리셰어]
+        SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월");
+        String date = format.format(Calendar.getInstance().getTime());
+        return date; //현재 년도와 월 반환
     }
 
     public void onTitleSelected(int i) {

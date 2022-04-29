@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,10 +15,10 @@ public class MonthCalendarAdapter extends BaseAdapter {
 
     private Context Context;
     private int Resource;
-    private ArrayList<MonthCalendarAdapter> Days = new ArrayList<MonthCalendarAdapter>();
-    Calendar cal = Calendar.getInstance();
+    private ArrayList<String> Days = new ArrayList<String>();
+    Calendar cal;
 
-    public MonthCalendarAdapter (Context context, int resource, ArrayList<MonthCalendarAdapter> days) {
+    public MonthCalendarAdapter (Context context, int resource, ArrayList<String> days) {
         Context = context;
         Resource = resource;
         Days = days;
@@ -39,16 +40,17 @@ public class MonthCalendarAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        if (view == null) {
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater)
                     Context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(Resource, viewGroup,false);
+            convertView = inflater.inflate(Resource, parent,false);
         }
 
-        GridView day = (GridView) view.findViewById(R.id.gridview);
+        TextView day = (TextView) convertView.findViewById(R.id.gridview_day);
+        day.setText(Days.get(position));
 
-        return view;
+        return convertView;
     }
 
 }
