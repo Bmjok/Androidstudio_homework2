@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,25 +14,28 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MonthCalendarFragment extends Fragment {
+    //MonthCalendarFragment <-> MonthVPAdapter
     ArrayList<String> list = new ArrayList<>();
+    Calendar cal = Calendar.getInstance();
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "year";
+    private static final String ARG_PARAM2 = "month";
 
-    private String mParam1;
-    private String mParam2;
+    private int year;
+    private int month;
 
     public MonthCalendarFragment() {
 
     }
 
-    public static MonthCalendarFragment newInstance(String param1, String param2) {
+    public static MonthCalendarFragment newInstance(int year, int month) {
         MonthCalendarFragment fragment = new MonthCalendarFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, year);
+        args.putInt(ARG_PARAM2, month);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,15 +43,16 @@ public class MonthCalendarFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        FragmentStateAdapter adapter = new MonthVPAdapter(this);
 
         View rootView = inflater.inflate(R.layout.fragment_monthcalendar, container, false);
         GridView gridView = rootView.findViewById(R.id.gridview);

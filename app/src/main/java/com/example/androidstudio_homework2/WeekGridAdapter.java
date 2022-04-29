@@ -4,9 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import java.util.Calendar;
-
-public class MonthAdapter extends BaseAdapter {
+public class WeekGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {

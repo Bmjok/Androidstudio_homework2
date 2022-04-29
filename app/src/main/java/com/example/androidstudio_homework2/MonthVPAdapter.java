@@ -9,27 +9,23 @@ import java.util.Calendar;
 
 public class MonthVPAdapter extends FragmentStateAdapter {
 
-    public MonthVPAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public MonthVPAdapter(@NonNull MonthCalendarFragment fragmentActivity) {
         super(fragmentActivity);
     }
 
-    private Fragment MonthVPAdapter(int position){
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = position;
-
-        return MonthFragment.newInstance(year, month);
-    }
-
+    //Each Page
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return null;
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = position;
+        return MonthCalendarFragment.newInstance(year, month); //Fragment Instance
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 12; //수정해야됨
     }
 
 }
