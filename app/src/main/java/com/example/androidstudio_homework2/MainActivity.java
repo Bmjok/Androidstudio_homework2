@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
         ActionBar ab = getSupportActionBar();
         ab.setTitle("날짜출력");
 
-        //기본화면 -> 월 달력으로 설정
+        //기본화면(초기화면) -> 월 달력으로 설정
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, new MonthCalendarFragment());
