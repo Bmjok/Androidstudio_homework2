@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import java.util.Calendar;
 
 public class MonthGridFragment extends Fragment {
+    //교재 DetailsFragment 같은 존재
     //MonthGridFragment <-> MonthGridAdapter
     Calendar cal = Calendar.getInstance();
 

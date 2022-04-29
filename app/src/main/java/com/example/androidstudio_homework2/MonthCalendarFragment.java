@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MonthCalendarFragment extends Fragment {
+    //교재 TitlesFragment 같은 존재
     //MonthCalendarFragment <-> MonthCalendarAdapter
     ArrayList<MonthGridAdapter> items = new ArrayList<MonthGridAdapter>();
     Calendar cal = Calendar.getInstance();

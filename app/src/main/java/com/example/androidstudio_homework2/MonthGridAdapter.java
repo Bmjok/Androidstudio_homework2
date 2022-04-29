@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -46,6 +47,9 @@ public class MonthGridAdapter extends BaseAdapter {
                     Context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(Resource, viewGroup,false);
         }
+
+        GridView day = (GridView) view.findViewById(R.id.gridview);
+
         return view;
     }
 
