@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ import java.util.Calendar;
 
 public class MonthCalendarFragment extends Fragment {
     //MonthCalendarFragment <-> MonthCalendarAdapter
-    ArrayList<MonthCalendarAdapter> items = new ArrayList<MonthCalendarAdapter>();
+    ArrayList<MonthCalendarAdapter> days = new ArrayList<MonthCalendarAdapter>();
     Calendar cal = Calendar.getInstance();
 
     private static final String ARG_PARAM1 = "year";
@@ -63,7 +62,7 @@ public class MonthCalendarFragment extends Fragment {
                 new ArrayAdapter<MonthCalendarAdapter>(
                         getActivity(),
                         android.R.layout.simple_list_item_activated_1,
-                        items)); //데이터 추가 필요함 ******************
+                        days)); //데이터 추가 필요함 ******************
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -14,23 +14,23 @@ public class MonthCalendarAdapter extends BaseAdapter {
 
     private Context Context;
     private int Resource;
-    private ArrayList<MonthCalendarAdapter> Items = new ArrayList<MonthCalendarAdapter>();
+    private ArrayList<MonthCalendarAdapter> Days = new ArrayList<MonthCalendarAdapter>();
     Calendar cal = Calendar.getInstance();
 
-    public MonthCalendarAdapter (Context context, int resource, ArrayList<MonthCalendarAdapter> items) {
+    public MonthCalendarAdapter (Context context, int resource, ArrayList<MonthCalendarAdapter> days) {
         Context = context;
         Resource = resource;
-        Items = items;
+        Days = days;
     }
 
     @Override
     public int getCount() {
-        return Items.size();
+        return Days.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return Items.get(position);
+        return Days.get(position);
     }
 
     @Override
