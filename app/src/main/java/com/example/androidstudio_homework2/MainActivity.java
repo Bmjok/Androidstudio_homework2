@@ -25,9 +25,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //간단 날짜 불러오기 everyshare.tistory.com/3 [에브리셰어]
+        SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월");
+        String date = format.format(Calendar.getInstance().getTime());
+
         //액션바 타이틀 변경: https://onlyfor-me-blog.tistory.com/196
         ActionBar ab = getSupportActionBar();
-        ab.setTitle("날짜수정");
+        ab.setTitle(date); //******** 이대로 두면 안되고, 이동하면 날짜가 바뀌게 수정해야함
 
         //기본화면(초기화면) -> 월 달력으로 설정
         FragmentManager fragmentManager = getSupportFragmentManager();
