@@ -61,7 +61,7 @@ public class MonthCalendarFragment extends Fragment {
                 new ArrayAdapter<String>(
                         getActivity(),
                         android.R.layout.simple_list_item_activated_1,
-                        list)); //아무거나 적어놓음 수정 필요함
+                        data)); //데이터 수정 필요함 ******************
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

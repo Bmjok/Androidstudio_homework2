@@ -25,7 +25,7 @@ public class MonthVPAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 12; //수정해야됨
+        return 12; //수정해야됨 **************************
     }
 
 }
