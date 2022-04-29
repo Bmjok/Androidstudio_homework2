@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
                 //월 선택 -> 월 달력 출력
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new MonthGridFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new MonthCalendarFragment());
                 fragmentTransaction.commit();
                 //MonthFragment 불러오기
                 return true;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
                 //주 선택 -> 주 달력 출력
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new WeekGridFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new WeekCalendarFragment());
                 fragmentTransaction.commit();
                 //WeekFragment 불러오기
                 return true;
