@@ -19,7 +19,6 @@ import java.util.Calendar;
 public class MonthCalendarFragment extends Fragment {
     //교재 TitlesFragment 같은 존재
     //MonthCalendarFragment <-> MonthCalendarAdapter
-    ArrayList<MonthGridAdapter> items = new ArrayList<MonthGridAdapter>();
     Calendar cal = Calendar.getInstance();
 
     private static final String ARG_PARAM1 = "year";
@@ -53,16 +52,9 @@ public class MonthCalendarFragment extends Fragment {
 
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
-        FragmentStateAdapter adapter = new MonthCalendarAdapter(this);
 
-        View rootView = inflater.inflate(R.layout.fragment_monthcalendar, container, false);
-        GridView gridView = rootView.findViewById(R.id.gridview);
-
-        gridView.setAdapter(
-                new ArrayAdapter<MonthGridAdapter>(
-                        getActivity(),
-                        android.R.layout.simple_list_item_activated_1,
-                        items)); //데이터 추가 필요함 ******************
+        View rootView = inflater.inflate(R.layout.fragment_monthcalendar,
+                container, false);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
