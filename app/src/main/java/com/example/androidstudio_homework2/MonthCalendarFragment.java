@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MonthCalendarFragment extends Fragment {
-    //MonthCalendarFragment <-> MonthVPAdapter
+    //MonthCalendarFragment <-> MonthCalendarAdapter
     ArrayList<String> list = new ArrayList<>();
     Calendar cal = Calendar.getInstance();
 
@@ -52,7 +52,7 @@ public class MonthCalendarFragment extends Fragment {
 
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
-        FragmentStateAdapter adapter = new MonthVPAdapter(this);
+        FragmentStateAdapter adapter = new MonthCalendarAdapter(this);
 
         View rootView = inflater.inflate(R.layout.fragment_monthcalendar, container, false);
         GridView gridView = rootView.findViewById(R.id.gridview);
@@ -61,7 +61,7 @@ public class MonthCalendarFragment extends Fragment {
                 new ArrayAdapter<String>(
                         getActivity(),
                         android.R.layout.simple_list_item_activated_1,
-                        data)); //데이터 수정 필요함 ******************
+                        list)); //데이터 추가 필요함 ******************
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -7,9 +7,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.Calendar;
 
-public class MonthVPAdapter extends FragmentStateAdapter {
+public class MonthCalendarAdapter extends FragmentStateAdapter {
 
-    public MonthVPAdapter(@NonNull MonthCalendarFragment fragmentActivity) {
+    public MonthCalendarAdapter(@NonNull MonthCalendarFragment fragmentActivity) {
         super(fragmentActivity);
     }
 

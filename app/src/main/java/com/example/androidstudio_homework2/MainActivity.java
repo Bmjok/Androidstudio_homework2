@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
                 //월 선택 -> 월 달력 출력
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new MonthFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new MonthGridFragment());
                 fragmentTransaction.commit();
                 //MonthFragment 불러오기
                 return true;
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements MonthCalendarFrag
                 //주 선택 -> 주 달력 출력
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new WeekFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new WeekGridFragment());
                 fragmentTransaction.commit();
                 //WeekFragment 불러오기
                 return true;
