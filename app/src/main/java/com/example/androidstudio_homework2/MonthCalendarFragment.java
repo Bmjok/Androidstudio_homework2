@@ -55,7 +55,7 @@ public class MonthCalendarFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_monthcalendar,
                 container, false);
-
+        GridView gridView = rootView.findViewById(R.id.gridview);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
