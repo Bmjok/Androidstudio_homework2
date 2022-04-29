@@ -15,10 +15,10 @@ import java.util.Calendar;
 public class MonthGridAdapter extends BaseAdapter {
     private Context Context;
     private int Resource;
-    private ArrayList<String> Items = new ArrayList<String>();
+    private ArrayList<MonthGridAdapter> Items = new ArrayList<MonthGridAdapter>();
     Calendar cal = Calendar.getInstance();
 
-    public MonthGridAdapter (Context context, int resource, ArrayList<String> items) {
+    public MonthGridAdapter (Context context, int resource, ArrayList<MonthGridAdapter> items) {
         Context = context;
         Resource = resource;
         Items = items;
