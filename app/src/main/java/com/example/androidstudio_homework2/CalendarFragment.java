@@ -24,7 +24,7 @@ public class CalendarFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        GridView gridView = rootView.findViewById(R.id.grid_calendar);
+        GridView gridView = rootView.findViewById(R.id.gridview);
 
         gridView.setAdapter(
                 new ArrayAdapter<String>(
