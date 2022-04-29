@@ -1,6 +1,7 @@
 package com.example.androidstudio_homework2;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -40,7 +41,12 @@ public class MonthGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        return null; //수정 필요 *****************************
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater)
+                    Context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(Resource, viewGroup,false);
+        }
+        return view;
     }
 
 }
