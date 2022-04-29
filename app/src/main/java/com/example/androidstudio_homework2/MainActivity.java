@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements MonthCalendarFragment.OnTitleSelectedListener{
-    ArrayList<MonthGridAdapter> items = new ArrayList<MonthGridAdapter>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
