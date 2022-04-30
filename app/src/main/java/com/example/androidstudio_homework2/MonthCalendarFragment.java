@@ -50,14 +50,14 @@ public class MonthCalendarFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /*
         if (getArguments() != null) {
             year = getArguments().getInt(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
-        }
-        */
 
+            //액션바 타이틀 변경(setTitle()메소드): https://onlyfor-me-blog.tistory.com/196
+            ActionBar ab = ((MainActivity)getActivity()).getSupportActionBar();
+            ab.setTitle(year+"년"+(month+1)+"월");
+        }
     }
 
     @Override
