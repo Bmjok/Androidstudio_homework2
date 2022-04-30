@@ -29,12 +29,8 @@ public class MonthViewFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String ARG_PARAM1 = "year";
+    private static final String ARG_PARAM2 = "month";
 
     public MonthViewFragment() {
         // Required empty public constructor
@@ -44,16 +40,17 @@ public class MonthViewFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param year Parameter 1.
+     * @param month Parameter 2.
      * @return A new instance of fragment MonthViewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MonthViewFragment newInstance(String param1, String param2) {
+    public static MonthViewFragment newInstance(int year, int month) {
+        //매개변수로 년도와 월을 받음
         MonthViewFragment fragment = new MonthViewFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, year);
+        args.putInt(ARG_PARAM2, month);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,10 +58,12 @@ public class MonthViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            year = getArguments().getInt(ARG_PARAM1);
+            month = getArguments().getInt(ARG_PARAM2);
         }
+        */
 
     }
 
@@ -79,8 +78,7 @@ public class MonthViewFragment extends Fragment {
         ViewPager2 vpPager = rootView.findViewById(R.id.vpPager);
         FragmentStateAdapter adapter = new MonthViewAdapter(this);
         vpPager.setAdapter(adapter);
-
-        vpPager.setCurrentItem(0);
+        vpPager.setCurrentItem(month,false);
 
         // Attach the page change listener inside the activity
         vpPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

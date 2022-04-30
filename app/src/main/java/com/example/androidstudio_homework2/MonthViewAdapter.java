@@ -4,8 +4,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import java.util.Calendar;
+
 public class MonthViewAdapter extends FragmentStateAdapter {
-    private static int NUM_ITEMS=12;
+    private static int NUM_ITEMS=100; //12개월
 
     public MonthViewAdapter(MonthViewFragment fa) {
         super(fa);
@@ -15,13 +17,11 @@ public class MonthViewAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) { // ***** 수정필요
 
-        switch (position) {
-            case 0:
-                MonthCalendarFragment MonthCal = new MonthCalendarFragment();
-                return MonthCal;
-            default:
-                return null;
-        }
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = position;
+
+        return MonthCalendarFragment.newInstance(year, month);
     }
 
     // 전체 페이지 개수 반환
