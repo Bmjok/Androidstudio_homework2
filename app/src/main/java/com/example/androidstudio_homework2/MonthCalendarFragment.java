@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,11 +57,6 @@ public class MonthCalendarFragment extends Fragment {
             month = getArguments().getInt(ARG_PARAM2);
         }
         */
-
-        //액션바 타이틀 변경(setTitle()메소드): https://onlyfor-me-blog.tistory.com/196
-        ActionBar ab = ((MainActivity) getActivity()).getSupportActionBar();
-        ab.setTitle(year+"년"+(month+1)+"월");
-        //******** 이대로 두면 안되고, 이동하면 날짜가 바뀌게 수정해야함
 
     }
 
