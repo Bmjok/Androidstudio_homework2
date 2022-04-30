@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class MonthViewAdapter extends FragmentStateAdapter {
-    private static int NUM_ITEMS=3;
+    private static int NUM_ITEMS=12;
 
     public MonthViewAdapter(MonthViewFragment fa) {
         super(fa);
@@ -13,7 +13,7 @@ public class MonthViewAdapter extends FragmentStateAdapter {
 
     // 각 페이지를 나타내는 프래그먼트 반환
     @Override
-    public Fragment createFragment(int position) {
+    public Fragment createFragment(int position) { // ***** 수정필요
 
         switch (position) {
             case 0:

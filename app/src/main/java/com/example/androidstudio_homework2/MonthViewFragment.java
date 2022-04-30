@@ -80,6 +80,9 @@ public class MonthViewFragment extends Fragment {
         vpPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                year = 1;
+                month = 1;
                 //액션바 타이틀 변경(setTitle()메소드): https://onlyfor-me-blog.tistory.com/196
                 ActionBar ab = ((MainActivity)getActivity()).getSupportActionBar();
                 ab.setTitle(year+"년"+(month+1)+"월");

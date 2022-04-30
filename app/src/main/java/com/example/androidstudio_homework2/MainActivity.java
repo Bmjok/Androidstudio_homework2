@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         //기본화면(초기화면) -> 월 달력으로 설정
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, new MonthCalendarFragment());
+        fragmentTransaction.add(R.id.fragment_container, new MonthViewFragment());
         fragmentTransaction.commit();
 
     }
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
                 //월 선택 -> 월 달력 출력
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new MonthCalendarFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new MonthViewFragment());
                 fragmentTransaction.commit();
                 //MonthFragment 불러오기
                 return true;
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, new WeekCalendarFragment());
+                //weekviewfragment 추가한 뒤에 변경하기
                 fragmentTransaction.commit();
                 //WeekFragment 불러오기
                 return true;
