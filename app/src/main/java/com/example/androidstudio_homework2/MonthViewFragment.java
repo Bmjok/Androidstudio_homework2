@@ -11,12 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MonthViewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class MonthViewFragment extends Fragment {
+
+    ArrayList<String> days = new ArrayList<>();
+    Calendar cal = Calendar.getInstance();
 
     int year;
     int month;
@@ -81,8 +87,15 @@ public class MonthViewFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                year = 1;
-                month = 1;
+                year = (cal.get(Calendar.YEAR))+(position/12);
+                //월간 달력이니까, position은 달력 한 개를 뜻함.
+                //1년은 12월이므로, 포지션 12개를 불러왔다면 12개월을 불러왔으므로 1년이 추가되어야함.
+                //인덱스는 0부터 시작하니까 12로 나누는 게 맞음.
+                //++근데 이부분은 1월부터 시작이라는 가정이므로 수정이 조금 필요함.
+                //year에 대입하는 계산을 수정하거나 position자체를 수정하는 게 좋을듯.
+                //++ MonthViewAdapter의 position을 수정하는 게 좋을 것 같다.
+                month = position%12;
+                //position은 달력 한 개를 뜻하므로 나머지 값을 대입하면 쉽게 불러 올 수 있음(0~11)
                 //액션바 타이틀 변경(setTitle()메소드): https://onlyfor-me-blog.tistory.com/196
                 ActionBar ab = ((MainActivity)getActivity()).getSupportActionBar();
                 ab.setTitle(year+"년"+(month+1)+"월");
