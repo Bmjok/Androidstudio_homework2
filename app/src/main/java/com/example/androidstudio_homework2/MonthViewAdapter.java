@@ -8,7 +8,6 @@ import java.util.Calendar;
 
 public class MonthViewAdapter extends FragmentStateAdapter {
     //스와이프 동작에 따른 어댑터
-    //중요한건 month인듯?
     private static int NUM_ITEMS=100;
     //스와이프 횟수는 넉넉하게 100번 잡음
     //NUM_ITEMS 숫자 변경시 아래 position 값과, MonthViewFragment 내부 setCurrentItem 값도 변경해야 함.

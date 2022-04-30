@@ -76,7 +76,7 @@ public class MonthViewFragment extends Fragment {
         FragmentStateAdapter adapter = new MonthViewAdapter(this);
         vpPager.setAdapter(adapter);
         vpPager.setCurrentItem(50,false);
-
+        //왼쪽 스와이프를 위해 페이지 50설정
         return rootView;
     }
 }
