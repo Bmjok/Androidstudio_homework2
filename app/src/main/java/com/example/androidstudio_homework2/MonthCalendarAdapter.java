@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ public class MonthCalendarAdapter extends BaseAdapter {
     private int Resource;
     private ArrayList<String> Days = new ArrayList<String>();
     Calendar cal;
+    int I;
 
-    public MonthCalendarAdapter (Context context, int resource, ArrayList<String> days) {
+    public MonthCalendarAdapter(Context context, int resource, ArrayList<String> days, int i) {
         Context = context;
         Resource = resource;
         Days = days;
+        I = i;
     }
 
     @Override

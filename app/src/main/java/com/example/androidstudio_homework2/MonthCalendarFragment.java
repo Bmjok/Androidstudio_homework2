@@ -10,6 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -71,6 +72,15 @@ public class MonthCalendarFragment extends Fragment {
                 container, false);
         GridView gridView = rootView.findViewById(R.id.gridview);
 
+        MonthCalendarAdapter MonthCal;
+        if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
+                == Surface.ROTATION_90||getActivity().getWindowManager().getDefaultDisplay().getRotation()== Surface.ROTATION_270){
+            //어댑터 준비 (배열 객체 이용, simple_list_item_1 리소스 사용)
+            MonthCal = new MonthCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1,days,130);
+        }else{  //세로모드일 때
+            MonthCal = new MonthCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1,days,250);
+        }
+
         int startday = cal.get(Calendar.DAY_OF_WEEK);
         if(startday != 1) {
             for(int i=0; i<startday-1; i++) {
@@ -80,12 +90,6 @@ public class MonthCalendarFragment extends Fragment {
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
             days.add("" + (i + 1));
         } // 매월 1일이 요일과 일치하면 (ex: 22년 4월 1일은 금요일) 그때부터 해당 말일(4월은 30일)까지 날짜 출력
-
-        gridView.setAdapter(
-                new ArrayAdapter<>(
-                        getActivity(),
-                        android.R.layout.simple_list_item_activated_1,
-                        days)); //데이터 추가 필요함 ******************
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
