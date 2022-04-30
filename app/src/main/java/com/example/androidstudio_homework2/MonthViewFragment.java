@@ -75,14 +75,7 @@ public class MonthViewFragment extends Fragment {
         ViewPager2 vpPager = rootView.findViewById(R.id.vpPager);
         FragmentStateAdapter adapter = new MonthViewAdapter(this);
         vpPager.setAdapter(adapter);
-        //https://stackoverflow.com/questions/32401998/viewpager-setcurrentitem-is-not-working
-        vpPager.post(new Runnable() {
-            @Override
-            public void run() {
-                vpPager.setCurrentItem(50,false);
-            }
-        }); //음수 페이지 출력을 위해 설정한 값의 중간 페이지 출력
-
+        vpPager.setCurrentItem(50,false);
 
         return rootView;
     }
