@@ -97,6 +97,22 @@ public class MonthCalendarFragment extends Fragment {
     }
 
     private void takeCalendar(){
-        
+        //https://aries574.tistory.com/300 <-- 이 분 블로그 참고 했었다가 오류남...(우리한테 안맞음)
+        //그냥 저번에 했던 거 변형했어요!
+        cal.set(year,month,1);
+        int start_day = cal.get(Calendar.DAY_OF_WEEK); //첫 날
+        int finish_day = cal.getActualMaximum(Calendar.DATE); //마지막 날
+        int i;
+        //https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=my_stroy_1996&logNo=220775994665
+        //달력 출력 계산 참고
+        if(start_day != 1) {
+            for(i=0; i<start_day-1; i++) {
+                days.add(" ");
+            }
+        } // 매월 1일이 요일과 일치하지 않으면 공백 출력
+        for (i=1; i<=finish_day; i++) {
+            days.add(Integer.toString(i)); //형변환
+        } // 매월 1일이 요일과 일치하면 (ex: 22년 4월 1일은 금요일) 그때부터 해당 말일(4월은 30일)까지 날짜 출력
+        //날짜는 1일부터 마지막까지
     }
 }
