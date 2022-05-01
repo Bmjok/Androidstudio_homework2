@@ -1,9 +1,13 @@
 package com.example.androidstudio_homework2;
 
+import static java.util.Calendar.MONTH;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -33,6 +37,8 @@ public class MonthCalendarFragment extends Fragment {
     int year;
     int month;
     static int day = 1;
+    int start_day;
+    int finish_day;
 
     public MonthCalendarFragment() {
 
@@ -52,12 +58,15 @@ public class MonthCalendarFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            cal.set(cal.get(Calendar.YEAR), MONTH+1, 1);
             year = getArguments().getInt(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
 
             //액션바 타이틀 변경(setTitle()메소드): https://onlyfor-me-blog.tistory.com/196
             ActionBar ab = ((MainActivity)getActivity()).getSupportActionBar();
             ab.setTitle(year+"년"+(month+1)+"월");
+
+            takeCalendar(year, month);
         }
     }
 
@@ -70,9 +79,11 @@ public class MonthCalendarFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_monthcalendar,
                 container, false);
+        MonthCalendarAdapter MonthCal = new MonthCalendarAdapter
+                (getActivity().getApplicationContext(), day, days);
         GridView gridView = rootView.findViewById(R.id.gridview);
+        gridView.setAdapter(MonthCal);
 
-        MonthCalendarAdapter MonthCal;
         if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
                 == Surface.ROTATION_90||getActivity().getWindowManager().getDefaultDisplay().getRotation()== Surface.ROTATION_270){
             //어댑터 준비 (배열 객체 이용, simple_list_item_1 리소스 사용)
@@ -81,23 +92,9 @@ public class MonthCalendarFragment extends Fragment {
             MonthCal = new MonthCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1,days,250);
         }
 
-        int startday = cal.get(Calendar.DAY_OF_WEEK);
-        if(startday != 1) {
-            for(int i=0; i<startday-1; i++) {
-                days.add("");
-            }
-        } // 매월 1일이 요일과 일치하지 않으면 공백 출력
-        for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-            days.add("" + (i + 1));
-        } // 매월 1일이 요일과 일치하면 (ex: 22년 4월 1일은 금요일) 그때부터 해당 말일(4월은 30일)까지 날짜 출력
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Activity activity = getActivity();
-
-                if (activity instanceof OnTitleSelectedListener)
-                    ((OnTitleSelectedListener)activity).onTitleSelected((month+1));
                 Toast.makeText(getActivity(), month,Toast.LENGTH_SHORT).show();
                 //일 부분 수정해야함 **********************
             }
@@ -106,9 +103,23 @@ public class MonthCalendarFragment extends Fragment {
         return rootView;
     }
 
-    //인터페이스 구현
-    public interface OnTitleSelectedListener {
-        public void onTitleSelected(int i);
+    private ArrayList<String> takeCalendar(int year, int month) {
+        ArrayList<String> dayList = new ArrayList<>();
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        start_day = cal.get(Calendar.DAY_OF_WEEK) - 1; //달의 첫 날
+        finish_day = cal.getActualMaximum(Calendar.DATE); //달의 마지막 날
+
+        //https://aries574.tistory.com/300
+        for (int i=0; i<days.size(); i++) {
+            if ( i < start_day || i > (finish_day + start_day - 1) ) days.add("");
+            else days.add(Integer.toString(i - start_day + 1));
+        }
+
+        return dayList;
     }
 
 }

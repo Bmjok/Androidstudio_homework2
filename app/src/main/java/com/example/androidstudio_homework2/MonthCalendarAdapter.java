@@ -1,11 +1,15 @@
 package com.example.androidstudio_homework2;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +21,12 @@ public class MonthCalendarAdapter extends BaseAdapter {
     private ArrayList<String> Days = new ArrayList<String>();
     Calendar cal;
     int I;
+
+    public MonthCalendarAdapter(Context context, int resource, ArrayList<String> days) {
+        Context = context;
+        Resource = resource;
+        Days = days;
+    }
 
     public MonthCalendarAdapter(Context context, int resource, ArrayList<String> days, int i) {
         Context = context;
@@ -31,7 +41,7 @@ public class MonthCalendarAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public String getItem(int position) {
         return Days.get(position);
     }
 
@@ -42,16 +52,24 @@ public class MonthCalendarAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater)
                     Context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(Resource, parent,false);
+            convertView = inflater.inflate(R.layout.day, null);
         }
 
         TextView day = (TextView) convertView.findViewById(R.id.gridview_day);
-        day.setText(Days.get(position));
+        day.setText(Days.get(position)); //text<->string
+        day.setGravity(Gravity.CENTER_HORIZONTAL| Gravity.TOP);
+        GridView.LayoutParams params = new GridView.LayoutParams(
+                GridView.LayoutParams.MATCH_PARENT, I);
+        day.setLayoutParams(params);
+        day.setBackground(ContextCompat.getDrawable(
+                Context,R.drawable.gridview_selet
+        ));
 
-        return convertView;
+        return day;
     }
 
 }

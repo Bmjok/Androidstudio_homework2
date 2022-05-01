@@ -18,12 +18,14 @@ public class MonthViewAdapter extends FragmentStateAdapter {
         super(fa);
         Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH)+1;
+        month = cal.get(Calendar.MONTH);
     } //year와 month를 현재 날짜로 초기화
 
     // 각 페이지를 나타내는 프래그먼트 반환
     @Override
     public Fragment createFragment(int position) {
+        //계산 수정할거임!!!!! 왜 딜레이가 걸릴까요?
+        //https://furang-note.tistory.com/29
         position = position-(NUM_ITEMS/2);
         int s_p = month+position;
         int p_year;

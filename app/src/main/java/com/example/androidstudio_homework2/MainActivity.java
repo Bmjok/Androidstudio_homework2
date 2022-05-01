@@ -31,10 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onTitleSelected(int i) {
-
-    }
-
     //앱바
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
