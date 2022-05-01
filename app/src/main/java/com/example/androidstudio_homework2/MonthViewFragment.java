@@ -1,5 +1,8 @@
 package com.example.androidstudio_homework2;
 
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -49,6 +52,7 @@ public class MonthViewFragment extends Fragment {
         //매개변수로 년도와 월을 받음
         MonthViewFragment fragment = new MonthViewFragment();
         Bundle args = new Bundle();
+        Calendar.getInstance().set(YEAR, MONTH);
         args.putInt(ARG_PARAM1, year);
         args.putInt(ARG_PARAM2, month);
         fragment.setArguments(args);
@@ -68,10 +72,12 @@ public class MonthViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        cal = Calendar.getInstance();
+        year=cal.get(Calendar.YEAR);
+        month= cal.get(Calendar.MONTH);
 
         View rootView = inflater.inflate(R.layout.fragment_monthview,
                 container, false);
-
         ViewPager2 vpPager = rootView.findViewById(R.id.vpPager);
         FragmentStateAdapter adapter = new MonthViewAdapter(this);
         vpPager.setAdapter(adapter);

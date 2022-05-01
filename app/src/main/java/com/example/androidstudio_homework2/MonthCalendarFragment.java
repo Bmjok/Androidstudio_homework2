@@ -21,18 +21,18 @@ import java.util.Calendar;
 
 public class MonthCalendarFragment extends Fragment {
     //MonthCalendarFragment <-> MonthCalendarAdapter
-    Calendar cal = Calendar.getInstance();
-    ArrayList <String> days = new ArrayList();
+    ArrayList<String> days = new ArrayList<>();
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
 
-    static MonthCalendarAdapter MonthCal;
     int year;
     int month;
+    public static int day;
+    Calendar cal;
 
     public MonthCalendarFragment() {
-
+        // Required empty public constructor
     }
 
     public static MonthCalendarFragment newInstance(int year, int month) {
@@ -67,42 +67,36 @@ public class MonthCalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_monthcalendar, container, false);
-        // id가 girdview인 그리드뷰 객체를 얻어옴
-        GridView gridView = rootView.findViewById(R.id.gridview);
-        gridView.setAdapter(MonthCal);
 
-        ArrayList<String> days = dayOfArray(cal);
+        cal = Calendar.getInstance();
 
-        //화면전환
+        GridView gridview = (GridView)rootView.findViewById(R.id.gridview);
+
+        takeCalendar();
+
+        MonthCalendarAdapter MonthCal;
+
+        //가로모드일 때
         if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
                 == Surface.ROTATION_90||getActivity().getWindowManager().getDefaultDisplay().getRotation()== Surface.ROTATION_270){
-            MonthCal = new MonthCalendarAdapter(getActivity(), R.layout.day, days,130);
+            MonthCal = new MonthCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days,130);
         }else{  //세로모드일 때
-            MonthCal = new MonthCalendarAdapter(getActivity(), R.layout.day, days,250);
+            MonthCal = new MonthCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days,250);
         }
+        gridview.setAdapter(MonthCal);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String date = MonthCal.getItem(position);
-                Toast.makeText(getActivity(), (month+1)+"월 "+date+"일",Toast.LENGTH_SHORT).show();
-            }
-        });
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//                String date = MonthCal.getItem(position);
+//                Toast.makeText(getActivity(), (month+1)+"월 "+date+"일",Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         return rootView;
     }
 
-    public ArrayList<String> dayOfArray (Calendar cal) {
-        ArrayList <String> daysOfMonth = new ArrayList();
-        cal.set(YEAR, MONTH, 1);
-        //https://aries574.tistory.com/300
-        for (int i=0; i<daysOfMonth.size(); i++) {
-            if ( i < (cal.get(Calendar.DAY_OF_WEEK) - 1) ||
-                    i > ((cal.getActualMaximum(Calendar.DATE)) +
-                            (cal.get(Calendar.DAY_OF_WEEK) - 1) - 1) ) daysOfMonth.add("");
-            else daysOfMonth.add(Integer.toString(i - (cal.get(Calendar.DAY_OF_WEEK) - 1) + 1));
-        }
-        return daysOfMonth;
+    private void takeCalendar(){
+        
     }
-
 }

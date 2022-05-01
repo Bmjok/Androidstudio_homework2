@@ -18,10 +18,13 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
+    Calendar cal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        cal = Calendar.getInstance();
 
         //기본화면(초기화면) -> 월 달력으로 설정
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onTitleSelected(int year,int month,int day) {
+    public void onTitleSelected(int month,int day) {
 
     }
 
