@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onTitleSelected(int year,int month,int day) {
+
+    }
+
     //앱바
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

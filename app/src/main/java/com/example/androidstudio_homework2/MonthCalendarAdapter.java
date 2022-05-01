@@ -18,7 +18,7 @@ public class MonthCalendarAdapter extends BaseAdapter {
 
     private Context Context;
     private int Resource;
-    private ArrayList<String> Days = new ArrayList<String>();
+    ArrayList<String> Days;
     Calendar cal;
     int I;
 
@@ -56,7 +56,7 @@ public class MonthCalendarAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater)
                     Context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.day, null);
+            convertView = inflater.inflate(R.layout.day, parent,false);
         }
 
         TextView day = (TextView) convertView.findViewById(R.id.gridview_day);
