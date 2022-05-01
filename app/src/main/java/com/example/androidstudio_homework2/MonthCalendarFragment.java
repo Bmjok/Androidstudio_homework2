@@ -78,40 +78,33 @@ public class MonthCalendarFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_monthcalendar, container, false);
         // id가 girdview인 그리드뷰 객체를 얻어옴
         GridView gridView = rootView.findViewById(R.id.gridview);
+        gridView.setAdapter(MonthCal);
 
-        ArrayList<String> days = new ArrayList<>();
+        //https://aries574.tistory.com/300
+        for (int i=0; i<days.size(); i++) {
+            if ( i < (cal.get(Calendar.DAY_OF_WEEK) - 1) ||
+                    i > ((cal.getActualMaximum(Calendar.DATE)) +
+                            (cal.get(Calendar.DAY_OF_WEEK) - 1) - 1) ) days.add("");
+            else days.add(Integer.toString(i - (cal.get(Calendar.DAY_OF_WEEK) - 1) + 1));
+        }
 
+        //화면전환
         if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
                 == Surface.ROTATION_90||getActivity().getWindowManager().getDefaultDisplay().getRotation()== Surface.ROTATION_270){
             MonthCal = new MonthCalendarAdapter(getActivity(), R.layout.day, days,130);
         }else{  //세로모드일 때
             MonthCal = new MonthCalendarAdapter(getActivity(), R.layout.day, days,250);
         }
-        gridView.setAdapter(MonthCal);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 String date = MonthCal.getItem(position);
                 Toast.makeText(getActivity(), (month+1)+"월 "+date+"일",Toast.LENGTH_SHORT).show();
-                //수정해야함 **********************
             }
         });
 
         return rootView;
-    }
-
-    public ArrayList<String> dayOfArray() {
-        cal.set(Calendar.DATE, 1);
-        start_day = cal.get(Calendar.DAY_OF_WEEK) - 1; //달의 첫 날
-        finish_day = cal.getActualMaximum(Calendar.DATE); //달의 마지막 날
-
-        //https://aries574.tistory.com/300
-        for (int i=0; i<days.size(); i++) {
-            if ( i < start_day || i > (finish_day + start_day - 1) ) days.add("");
-            else days.add(Integer.toString(i - start_day + 1));
-        }
-        return days;
     }
 
 }
