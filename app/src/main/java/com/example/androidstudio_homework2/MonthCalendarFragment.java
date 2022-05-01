@@ -22,6 +22,7 @@ import java.util.Calendar;
 public class MonthCalendarFragment extends Fragment {
     //MonthCalendarFragment <-> MonthCalendarAdapter
     Calendar cal = Calendar.getInstance();
+    ArrayList <String> days = new ArrayList();
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
