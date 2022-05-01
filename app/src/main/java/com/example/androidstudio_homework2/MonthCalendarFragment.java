@@ -1,35 +1,27 @@
 package com.example.androidstudio_homework2;
 
 import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MonthCalendarFragment extends Fragment {
     //MonthCalendarFragment <-> MonthCalendarAdapter
-    ArrayList <String> days = new ArrayList();
-    Calendar cal;
+    Calendar cal = Calendar.getInstance();
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
@@ -37,8 +29,6 @@ public class MonthCalendarFragment extends Fragment {
     static MonthCalendarAdapter MonthCal;
     int year;
     int month;
-    int start_day;
-    int finish_day;
 
     public MonthCalendarFragment() {
 
@@ -80,13 +70,7 @@ public class MonthCalendarFragment extends Fragment {
         GridView gridView = rootView.findViewById(R.id.gridview);
         gridView.setAdapter(MonthCal);
 
-        //https://aries574.tistory.com/300
-        for (int i=0; i<days.size(); i++) {
-            if ( i < (cal.get(Calendar.DAY_OF_WEEK) - 1) ||
-                    i > ((cal.getActualMaximum(Calendar.DATE)) +
-                            (cal.get(Calendar.DAY_OF_WEEK) - 1) - 1) ) days.add("");
-            else days.add(Integer.toString(i - (cal.get(Calendar.DAY_OF_WEEK) - 1) + 1));
-        }
+        ArrayList<String> days = dayOfArray(cal);
 
         //화면전환
         if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
@@ -105,6 +89,19 @@ public class MonthCalendarFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    public ArrayList<String> dayOfArray (Calendar cal) {
+        ArrayList <String> daysOfMonth = new ArrayList();
+        cal.set(YEAR, MONTH, 1);
+        //https://aries574.tistory.com/300
+        for (int i=0; i<daysOfMonth.size(); i++) {
+            if ( i < (cal.get(Calendar.DAY_OF_WEEK) - 1) ||
+                    i > ((cal.getActualMaximum(Calendar.DATE)) +
+                            (cal.get(Calendar.DAY_OF_WEEK) - 1) - 1) ) daysOfMonth.add("");
+            else daysOfMonth.add(Integer.toString(i - (cal.get(Calendar.DAY_OF_WEEK) - 1) + 1));
+        }
+        return daysOfMonth;
     }
 
 }
