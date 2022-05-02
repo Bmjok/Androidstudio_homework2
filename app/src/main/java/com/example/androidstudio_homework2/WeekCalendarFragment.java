@@ -2,11 +2,15 @@ package com.example.androidstudio_homework2;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,14 +20,15 @@ import android.view.ViewGroup;
 public class WeekCalendarFragment extends Fragment {
     // WeekCalendarFragment <-> WeekCalendarAdapter
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    ArrayList<String> days = new ArrayList<>();
 
-    // TODO: Rename and change types of parameters
-    private int mParam1;
-    private int mParam2;
+    private static final String ARG_PARAM1 = "year";
+    private static final String ARG_PARAM2 = "month";
+
+    int year;
+    int month;
+    public static int day;
+    Calendar cal;
 
     public WeekCalendarFragment() {
         // Required empty public constructor
@@ -51,8 +56,11 @@ public class WeekCalendarFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getInt(ARG_PARAM2);
+            year = getArguments().getInt(ARG_PARAM1);
+            month = getArguments().getInt(ARG_PARAM2);
+            //액션바 타이틀 변경(setTitle()메소드): https://onlyfor-me-blog.tistory.com/196
+            ActionBar ab = ((MainActivity)getActivity()).getSupportActionBar();
+            ab.setTitle(year+"년"+(month+1)+"월");
         }
     }
 

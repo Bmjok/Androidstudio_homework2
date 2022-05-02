@@ -73,7 +73,7 @@ public class WeekViewFragment extends Fragment {
         ViewPager2 vpPager = rootView.findViewById(R.id.week_vpPager);
         FragmentStateAdapter adapter = new WeekViewAdapter(this);
         vpPager.setAdapter(adapter);
-        vpPager.setCurrentItem(50,false);
+        vpPager.setCurrentItem(500,false);
         //왼쪽 스와이프를 위해 페이지 50설정
 
         return rootView;
