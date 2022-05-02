@@ -114,7 +114,8 @@ public class MonthCalendarFragment extends Fragment {
             days.add(Integer.toString(i)); //형변환
         } // 매월 1일이 요일과 일치하면 (ex: 22년 4월 1일은 금요일) 그때부터 해당 말일(4월은 30일)까지 날짜 출력
         //날짜는 1일부터 마지막까지
-        for (i=0; i<42-days.size(); i++) {
+        //https://croute.me/335 [그리드뷰 달력 그리기 예제]
+        for (i=1; i<42-(start_day+finish_day-1)+1; i++) {
             days.add(" "); //달력 나머지 부분 흰색 그리드뷰로 채우기
         }
     }
