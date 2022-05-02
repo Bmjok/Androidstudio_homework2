@@ -1,9 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     tools:context=".WeekCalendarFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#A5E35D"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="일"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="월"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="화"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="수"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="목"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="금"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="토"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/week_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:numColumns="7"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="2dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="0"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="1"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="2"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="3"/>
+                <TextView
+                    android:layout_width="15dp"
+                    android:layout_height="45dp"
+                    android:text="4"/>
+                <TextView
+                    android:layout_width="15dp"
+                    android:layout_height="45dp"
+                    android:text="5"/>
+                <TextView
+                    android:layout_width="15dp"
+                    android:layout_height="45dp"
+                    android:text="6"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="7"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="8"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="9"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="10"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="11"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="12"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="13"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="14"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="15"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="16"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="17"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="18"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="19"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="20"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="21"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="22"/>
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp"
+                    android:text="23"/>
+
+            </LinearLayout>
+
+            <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/gridview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:numColumns="7"
+                android:verticalSpacing="2dp"
+                android:horizontalSpacing="2dp"
+                android:stretchMode="columnWidth"
+                android:background="@color/black"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

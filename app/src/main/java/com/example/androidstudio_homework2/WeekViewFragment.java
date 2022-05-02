@@ -3,10 +3,15 @@ package com.example.androidstudio_homework2;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,33 +20,31 @@ import android.view.ViewGroup;
  */
 public class WeekViewFragment extends Fragment {
 
+    ArrayList<String> days = new ArrayList<>();
+    Calendar cal = Calendar.getInstance();
+
+    int year;
+    int month;
+    int week;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String day;
 
     public WeekViewFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WeekViewFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static WeekViewFragment newInstance(String param1, String param2) {
+    public static WeekViewFragment newInstance(int year, int month, int week) {
         WeekViewFragment fragment = new WeekViewFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, year);
+        args.putInt(ARG_PARAM2, month);
+        args.putInt(ARG_PARAM3, week);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,8 +53,9 @@ public class WeekViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            year = getArguments().getInt(ARG_PARAM1);
+            month = getArguments().getInt(ARG_PARAM2);
+            week = getArguments().getInt(ARG_PARAM2);
         }
     }
 
@@ -59,6 +63,19 @@ public class WeekViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_weekview, container, false);
+        cal = Calendar.getInstance();
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
+        week = cal.get(Calendar.WEEK_OF_MONTH);
+
+        View rootView = inflater.inflate(R.layout.fragment_weekview,
+                container, false);
+        ViewPager2 vpPager = rootView.findViewById(R.id.week_vpPager);
+        FragmentStateAdapter adapter = new WeekViewAdapter(this);
+        vpPager.setAdapter(adapter);
+        vpPager.setCurrentItem(50,false);
+        //왼쪽 스와이프를 위해 페이지 50설정
+
+        return rootView;
     }
 }
