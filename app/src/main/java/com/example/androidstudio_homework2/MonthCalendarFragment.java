@@ -85,13 +85,13 @@ public class MonthCalendarFragment extends Fragment {
         }
         gridview.setAdapter(MonthCal);
 
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                String date = MonthCal.getItem(position);
-//                Toast.makeText(getActivity(), (month+1)+"월 "+date+"일",Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String date = MonthCal.getItem(position);
+                Toast.makeText(getActivity(), (month+1)+"월 "+date+"일",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return rootView;
     }
