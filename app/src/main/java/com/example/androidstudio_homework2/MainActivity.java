@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 //주 선택 -> 주 달력 출력
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new WeekCalendarFragment());
-                //weekviewfragment 추가한 뒤에 변경하기
+                fragmentTransaction.replace(R.id.fragment_container, new WeekViewFragment());
                 fragmentTransaction.commit();
                 //WeekFragment 불러오기
                 return true;
