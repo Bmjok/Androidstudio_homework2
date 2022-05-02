@@ -79,25 +79,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
-
-        <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/week_gridview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:numColumns="7"
-            android:verticalSpacing="2dp"
-            android:horizontalSpacing="2dp"
-            android:stretchMode="columnWidth"
-            android:gravity="center" />
-
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -212,11 +193,11 @@
             </LinearLayout>
 
             <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/gridview"
+                android:id="@+id/week_gridview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:numColumns="7"
+                android:numColumns="24"
                 android:verticalSpacing="2dp"
                 android:horizontalSpacing="2dp"
                 android:stretchMode="columnWidth"
