@@ -26,9 +26,8 @@ import java.util.Calendar;
 public class WeekCalendarFragment extends Fragment {
     // WeekCalendarFragment <-> WeekCalendarAdapter
 
-    ArrayList<String> days_1 = new ArrayList<>();
-    ArrayList<String> days_2 = new ArrayList<>();
-    ArrayList<String> days_3 = new ArrayList<>(); //공백 격자 저장
+    ArrayList<String> days_1 = new ArrayList<>(); //날짜 출력
+    ArrayList<String> days_2 = new ArrayList<>(); //공백 격자 저장
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
@@ -51,7 +50,7 @@ public class WeekCalendarFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
         args.putInt(ARG_PARAM2, param2);
-        args.putInt(ARG_PARAM3, week%6);
+        args.putInt(ARG_PARAM3, week);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,9 +61,7 @@ public class WeekCalendarFragment extends Fragment {
         if (getArguments() != null) {
             year = getArguments().getInt(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
-            //액션바 타이틀 변경(setTitle()메소드): https://onlyfor-me-blog.tistory.com/196
-            ActionBar ab = ((MainActivity)getActivity()).getSupportActionBar();
-            ab.setTitle(year+"년"+(month+1)+"월");
+            week = getArguments().getInt(ARG_PARAM3);
         }
     }
 
@@ -81,17 +78,16 @@ public class WeekCalendarFragment extends Fragment {
         takeWeekCalendar();
         getBlank();
 
-        WeekCalendarAdapter W2 = new WeekCalendarAdapter(getActivity(), android.R.layout.simple_list_item_1, days_2);
+        WeekCalendarAdapter W2 = new WeekCalendarAdapter(getActivity(), android.R.layout.simple_list_item_1, days_1);
         W_gridview.setAdapter(W2);
 
         WeekCalendarAdapter WeekCal;
-
         //가로모드일 때
         if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
                 == Surface.ROTATION_90||getActivity().getWindowManager().getDefaultDisplay().getRotation()== Surface.ROTATION_270){
-            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days_3,130);
+            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days_2,130);
         }else{  //세로모드일 때
-            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days_3,250);
+            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days_2,250);
         }
         week_gridview.setAdapter(WeekCal);
 
@@ -111,23 +107,33 @@ public class WeekCalendarFragment extends Fragment {
     private void takeWeekCalendar() { // *************** 이 함수는 요일 밑에 한 줄을 나타냄, 일주일씩만 출력함
         // *************** 주간 출력 함수 다시 만들어야 함 ***************
         cal.set(year, month, 1);
-        int start_day = cal.get(Calendar.DAY_OF_WEEK); //첫 날
-        int finish_day = cal.getActualMaximum(Calendar.DATE); //마지막 날
-        int i;
-
-        if (start_day != 1) {
-            for (i = 0; i < start_day - 1; i++) {
-                days_1.add(" ");
+        ActionBar actionBar =((MainActivity)getActivity()).getSupportActionBar();
+        actionBar.setTitle(cal.get(Calendar.YEAR)+"년"+(cal.get(Calendar.MONTH)+1)+"월");
+        if(week%5==5) {
+            for(int i=0; i<=7; i++){
+                days_1.add(Integer.toString(i));
             }
         }
-        for (i=1; i<=finish_day; i++) {
-            days_1.add(Integer.toString(i));
+        else if(week%5==4) {
+            for(int i=8; i<=15; i++){
+                days_1.add(Integer.toString(i));
+            }
+        }
+        else if(week%5==3) {
+            for(int i=16; i<=23; i++){
+                days_1.add(Integer.toString(i));
+            }
+        }
+        else if(week%5==2) {
+            for(int i=24; i<=31; i++){
+                days_1.add(Integer.toString(i));
+            }
         }
     }
 
     private void getBlank() { // *************** 이 함수는 주간 격자 출력 함수
         for(int i=1;i<=168;i++){
-            days_3.add("");}
+            days_2.add("");}
     }
 
 }

@@ -69,10 +69,10 @@ public class WeekCalendarAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater)
                     Context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.day, parent,false);
+            convertView = inflater.inflate(sResource, parent,false);
         }
 
-        TextView day = (TextView) convertView.findViewById(R.id.gridview_day);
+        TextView day = (TextView) convertView;
         day.setText(Days.get(position)); //text<->string
         day.setGravity(Gravity.CENTER_HORIZONTAL| Gravity.TOP);
         GridView.LayoutParams params = new GridView.LayoutParams(
