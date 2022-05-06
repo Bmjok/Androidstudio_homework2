@@ -1,5 +1,6 @@
 package com.example.androidstudio_homework2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -10,6 +11,7 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -24,7 +26,9 @@ import java.util.Calendar;
 public class WeekCalendarFragment extends Fragment {
     // WeekCalendarFragment <-> WeekCalendarAdapter
 
-    ArrayList<String> days = new ArrayList<>();
+    ArrayList<String> days_1 = new ArrayList<>();
+    ArrayList<String> days_2 = new ArrayList<>();
+    ArrayList<String> days_3 = new ArrayList<>(); //공백 격자 저장
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
@@ -38,14 +42,7 @@ public class WeekCalendarFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WeekCalendarFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static WeekCalendarFragment newInstance(int param1, int param2) {
         WeekCalendarFragment fragment = new WeekCalendarFragment();
@@ -68,7 +65,6 @@ public class WeekCalendarFragment extends Fragment {
         }
     }
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -86,9 +82,9 @@ public class WeekCalendarFragment extends Fragment {
         //가로모드일 때
         if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
                 == Surface.ROTATION_90||getActivity().getWindowManager().getDefaultDisplay().getRotation()== Surface.ROTATION_270){
-            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days,130);
+            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days_3,130);
         }else{  //세로모드일 때
-            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days,250);
+            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days_3,250);
         }
         gridview.setAdapter(WeekCal);
 
@@ -103,30 +99,32 @@ public class WeekCalendarFragment extends Fragment {
         });
 
         return rootView;
+
     }
 
-    private void takeWeekCalendar(){ // *************** 이 함수는 요일 밑에 한 줄을 나타냄, 일주일씩만 출력함
+    private void takeWeekCalendar() { // *************** 이 함수는 요일 밑에 한 줄을 나타냄, 일주일씩만 출력함
         // *************** 주간 출력 함수 다시 만들어야 함 ***************
-        cal.set(year,month,1);
+        cal.set(year, month, 1);
         int start_day = cal.get(Calendar.DAY_OF_WEEK); //첫 날
         int finish_day = cal.getActualMaximum(Calendar.DATE); //마지막 날
         int i;
 
-        if(start_day != 1) {
-            for(i=0; i<start_day-1; i++) {
-                days.add(" ");
+        if (start_day != 1) {
+            for (i = 0; i < start_day - 1; i++) {
+                days_1.add(" ");
             }
         }
         for (i=1; i<=finish_day; i++) {
-            days.add(Integer.toString(i));
+            days_1.add(Integer.toString(i));
         }
         for (i=1; i<42-(start_day+finish_day-1)+1; i++) {
-            days.add(" ");
+            days_1.add(" ");
         }
     }
 
     private void getBlank() { // *************** 이 함수는 주간 격자 출력 함수
-
+        for(int i=1;i<=168;i++){
+            days_3.add("");}
     }
 
 }
