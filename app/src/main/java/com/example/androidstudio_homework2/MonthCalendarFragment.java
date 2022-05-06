@@ -3,6 +3,7 @@ package com.example.androidstudio_homework2;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;

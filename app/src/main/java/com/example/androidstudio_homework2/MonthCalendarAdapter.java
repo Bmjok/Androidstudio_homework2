@@ -1,12 +1,16 @@
 package com.example.androidstudio_homework2;
 
+import static com.example.androidstudio_homework2.R.id.gridview;
+
 import android.content.Context;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -16,26 +20,31 @@ import java.util.Calendar;
 
 public class MonthCalendarAdapter extends BaseAdapter {
 
-    Context Context;
+    Context context;
     int Resource;
     int sResource;
     ArrayList<String> Days;
     Calendar cal;
     int I;
 
+    public MonthCalendarAdapter(Context context)
+    {
+        this.context = context;
+    }
+
     public MonthCalendarAdapter(Context context, int s_resource) {
-        Context = context;
+        this.context = context;
         sResource = s_resource;
     }
 
     public MonthCalendarAdapter(Context context, int s_resource, ArrayList<String> days) {
-        Context = context;
+        this.context = context;
         sResource = s_resource;
         Days = days;
     }
 
     public MonthCalendarAdapter(Context context, int s_resource, ArrayList<String> days, int i) {
-        Context = context;
+        this.context = context;
         sResource = s_resource;
         Days = days;
         I = i;
@@ -71,18 +80,22 @@ public class MonthCalendarAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater)
-                    Context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.day, parent,false);
+                    context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(sResource, parent,false);
         }
 
-        TextView day = (TextView) convertView.findViewById(R.id.gridview_day);
+        TextView day = (TextView) convertView;
         day.setText(Days.get(position)); //text<->string
+
         day.setGravity(Gravity.CENTER_HORIZONTAL| Gravity.TOP);
+
         GridView.LayoutParams params = new GridView.LayoutParams(
                 GridView.LayoutParams.MATCH_PARENT, I);
         day.setLayoutParams(params);
+
+        //출처:https://arabiannight.tistory.com/60
         day.setBackground(ContextCompat.getDrawable(
-                Context,R.drawable.gridview_selet
+                context, R.drawable.gridview_selet
         ));
 
         return day;
