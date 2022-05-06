@@ -32,6 +32,7 @@ public class WeekViewAdapter extends FragmentStateAdapter {
         int w_year = year;
         int w_month = month;
         //스와이프된 년과 월
+        int week = position;
 
         if(w_week > finish_day) { //스와이프 해서 넘어간 페이지의 날짜가 마지막 날짜보다 클 때
             //ex: 마지막 날은 31일, 현재는 26일, +7일 뒤는 33일
@@ -65,7 +66,7 @@ public class WeekViewAdapter extends FragmentStateAdapter {
             }
         }
 
-        return WeekCalendarFragment.newInstance(w_year, w_month);
+        return WeekCalendarFragment.newInstance(w_year, w_month, week);
     }
 
     // 전체 페이지 개수 반환

@@ -32,9 +32,11 @@ public class WeekCalendarFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
+    private static final String ARG_PARAM3 = "week";
 
     int year;
     int month;
+    int week;
     public static int day;
     Calendar cal;
 
@@ -44,11 +46,12 @@ public class WeekCalendarFragment extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static WeekCalendarFragment newInstance(int param1, int param2) {
+    public static WeekCalendarFragment newInstance(int param1, int param2, int week) {
         WeekCalendarFragment fragment = new WeekCalendarFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
         args.putInt(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM3, week%6);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,10 +75,14 @@ public class WeekCalendarFragment extends Fragment {
 
         cal = Calendar.getInstance();
 
-        GridView gridview = (GridView)rootView.findViewById(R.id.week_gridview);
+        GridView W_gridview = (GridView)rootView.findViewById(R.id.gridview);
+        GridView week_gridview = (GridView)rootView.findViewById(R.id.week_gridview);
 
         takeWeekCalendar();
         getBlank();
+
+        WeekCalendarAdapter W2 = new WeekCalendarAdapter(getActivity(), android.R.layout.simple_list_item_1, days_2);
+        W_gridview.setAdapter(W2);
 
         WeekCalendarAdapter WeekCal;
 
@@ -86,13 +93,12 @@ public class WeekCalendarFragment extends Fragment {
         }else{  //세로모드일 때
             WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days_3,250);
         }
-        gridview.setAdapter(WeekCal);
+        week_gridview.setAdapter(WeekCal);
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        week_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String date = WeekCal.getItem(position);
-                Toast.makeText(getActivity(), "position = "+date,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "position = "+position,Toast.LENGTH_SHORT).show();
                 // *************** 토스트 메시지 date 부분 수정 ***************
                 // 선택된 격자의 position을 나타내야함. (날짜랑은 다름)
             }
@@ -116,9 +122,6 @@ public class WeekCalendarFragment extends Fragment {
         }
         for (i=1; i<=finish_day; i++) {
             days_1.add(Integer.toString(i));
-        }
-        for (i=1; i<42-(start_day+finish_day-1)+1; i++) {
-            days_1.add(" ");
         }
     }
 
