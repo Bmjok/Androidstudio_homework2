@@ -99,7 +99,7 @@ public class MonthCalendarFragment extends Fragment {
     }
 
     private void takeCalendar(){
-        //https://aries574.tistory.com/300 <-- 이 분 블로그 참고 했었다가 오류남...(우리한테 안맞음)
+        //https://aries574.tistory.com/300
         //그냥 저번에 했던 거 변형했어요!
         cal.set(year,month,1);
         int start_day = cal.get(Calendar.DAY_OF_WEEK); //첫 날
