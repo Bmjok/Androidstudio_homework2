@@ -26,8 +26,9 @@ import java.util.Calendar;
 public class WeekCalendarFragment extends Fragment {
     // WeekCalendarFragment <-> WeekCalendarAdapter
 
-    ArrayList<String> days_1 = new ArrayList<>(); //날짜 출력
-    ArrayList<String> days_2 = new ArrayList<>(); //공백 격자 저장
+    ArrayList<String> days_1 = new ArrayList<>(); //공백, 날짜 저장
+    ArrayList<String> days_2 = new ArrayList<>(); //일주일 간격 출력
+    ArrayList<String> days_3 = new ArrayList<>(); //공백 격자 저장
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
@@ -78,17 +79,17 @@ public class WeekCalendarFragment extends Fragment {
         takeWeekCalendar();
         getBlank();
 
-        WeekCalendarAdapter W2 = new WeekCalendarAdapter(getActivity(), android.R.layout.simple_list_item_1, days_1);
-        W_gridview.setAdapter(W2);
+        WeekCalendarAdapter W2 = new WeekCalendarAdapter(getActivity(), android.R.layout.simple_list_item_1, days_2);
 
         WeekCalendarAdapter WeekCal;
         //가로모드일 때
         if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
                 == Surface.ROTATION_90||getActivity().getWindowManager().getDefaultDisplay().getRotation()== Surface.ROTATION_270){
-            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days_2,130);
-        }else{  //세로모드일 때
-            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1, days_2,250);
+            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1,days_3,130);
+        }else{ //세로모드일 때
+            WeekCal = new WeekCalendarAdapter(getActivity(),android.R.layout.simple_list_item_1,days_3,250);
         }
+        W_gridview.setAdapter(W2);
         week_gridview.setAdapter(WeekCal);
 
         week_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -107,31 +108,28 @@ public class WeekCalendarFragment extends Fragment {
     private void takeWeekCalendar() { // *************** 이 함수는 요일 밑에 한 줄을 나타냄, 일주일씩만 출력함
         // *************** 주간 출력 함수 다시 만들어야 함 ***************
         cal.set(year, month, 1);
-        if(week%5==5) {
-            for(int i=0; i<=7; i++){
-                days_1.add(Integer.toString(i));
+        int start_day = cal.get(Calendar.DAY_OF_WEEK); //첫 날
+        int finish_day = cal.getActualMaximum(Calendar.DATE); //마지막 날
+        int i;
+        if(start_day != 1) {
+            for(i=0; i<start_day-1; i++) {
+                days_1.add(" ");
             }
-        }
-        else if(week%5==4) {
-            for(int i=8; i<=15; i++){
-                days_1.add(Integer.toString(i));
-            }
-        }
-        else if(week%5==3) {
-            for(int i=16; i<=23; i++){
-                days_1.add(Integer.toString(i));
-            }
-        }
-        else if(week%5==2) {
-            for(int i=24; i<=31; i++){
-                days_1.add(Integer.toString(i));
-            }
+        } // 매월 1일이 요일과 일치하지 않으면 공백 출력
+        for (i=1; i<=finish_day; i++) {
+            days_1.add(Integer.toString(i)); //형변환
+        } // 매월 1일이 요일과 일치하면 (ex: 22년 4월 1일은 금요일) 그때부터 해당 말일(4월은 30일)까지 날짜 출력
+        //날짜는 1일부터 마지막까지
+        //https://croute.me/335 [그리드뷰 달력 그리기 예제]
+        for (i=1; i<42-(start_day+finish_day-1)+1; i++) {
+            days_1.add(" "); //달력 나머지 부분 흰색 그리드뷰로 채우기
         }
     }
 
     private void getBlank() { // *************** 이 함수는 주간 격자 출력 함수
         for(int i=1;i<=168;i++){
-            days_2.add("");}
+            days_3.add("");
+        }
     }
 
 }
