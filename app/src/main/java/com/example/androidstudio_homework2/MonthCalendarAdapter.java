@@ -84,6 +84,7 @@ public class MonthCalendarAdapter extends BaseAdapter {
         day.setLayoutParams(params);
 
         //출처:https://arabiannight.tistory.com/60
+        //출처:https://code-examples.net/ko/q/21d719
         day.setBackground(ContextCompat.getDrawable(
                 context, R.drawable.gridview_selet
         ));
