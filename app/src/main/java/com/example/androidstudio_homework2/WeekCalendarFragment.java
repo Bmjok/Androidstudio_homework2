@@ -130,7 +130,7 @@ public class WeekCalendarFragment extends Fragment {
 
         if(week==0) { //첫째주 (여기서 i는 날짜가 아니고 인덱스임!)
             for(i=0; i<=6; i++) {
-                days_2.add(days_1.get(i));
+                days_2.add(days_1.get(i)); //1번 배열에 있는 i번째를 2번 배열에 추가해서 출력하는 방식
             }
         }
         else if(week==1) { //둘째주
