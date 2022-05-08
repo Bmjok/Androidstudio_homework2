@@ -80,6 +80,7 @@ public class WeekCalendarFragment extends Fragment {
         getBlank();
 
         WeekCalendarAdapter W2 = new WeekCalendarAdapter(getActivity(), android.R.layout.simple_list_item_1, days_2);
+        //화면에 뿌리는건 days_2번을 뿌려야함!!
 
         WeekCalendarAdapter WeekCal;
         //가로모드일 때
@@ -111,18 +112,51 @@ public class WeekCalendarFragment extends Fragment {
         int start_day = cal.get(Calendar.DAY_OF_WEEK); //첫 날
         int finish_day = cal.getActualMaximum(Calendar.DATE); //마지막 날
         int i;
+
+        //첫째주: week==0, 둘째주: week==1, 셋째주: week==2, 넷째주: week==3, 다섯째주: week==4
+        //가끔 여섯째주 있음...(ex: 22년 7월) week==5
+
         if(start_day != 1) {
             for(i=0; i<start_day-1; i++) {
                 days_1.add(" ");
             }
-        } // 매월 1일이 요일과 일치하지 않으면 공백 출력
+        } //주간 달력도 1일과 첫 요일을 맞춰야 함. 안맞으면 공백으로 출력하기.
         for (i=1; i<=finish_day; i++) {
-            days_1.add(Integer.toString(i)); //형변환
-        } // 매월 1일이 요일과 일치하면 (ex: 22년 4월 1일은 금요일) 그때부터 해당 말일(4월은 30일)까지 날짜 출력
-        //날짜는 1일부터 마지막까지
-        //https://croute.me/335 [그리드뷰 달력 그리기 예제]
+            days_1.add(Integer.toString(i));
+        } //이 부분을 수정해야함. 출력할 때 일주일씩 보여야 함. -> days_2를 하나 더 만드는 걸로 수정
         for (i=1; i<42-(start_day+finish_day-1)+1; i++) {
-            days_1.add(" "); //달력 나머지 부분 흰색 그리드뷰로 채우기
+            days_1.add(" ");
+        } //마지막 부분 공백 출력(월이 바로 바뀌면 안됨)
+
+        if(week==0) { //첫째주 (여기서 i는 날짜가 아니고 인덱스임!)
+            for(i=0; i<=6; i++) {
+                days_2.add(days_1.get(i));
+            }
+        }
+        else if(week==1) { //둘째주
+            for(i=7; i<=13; i++) {
+                days_2.add(days_1.get(i));
+            }
+        }
+        else if(week==2) { //셋째주
+            for(i=14; i<=20; i++) {
+                days_2.add(days_1.get(i));
+            }
+        }
+        else if(week==3) { //넷째주
+            for(i=21; i<=27; i++) {
+                days_2.add(days_1.get(i));
+            }
+        }
+        else if(week==4) { //다섯째주
+            for(i=28; i<=34; i++) {
+                days_2.add(days_1.get(i));
+            }
+        } //배열의 크기보다 커져서 오류 발생
+        else if(week==5) { //여섯째주
+            for(i=35; i<(start_day+finish_day-1); i++) {
+                days_2.add(days_1.get(i));
+            }
         }
     }
 
