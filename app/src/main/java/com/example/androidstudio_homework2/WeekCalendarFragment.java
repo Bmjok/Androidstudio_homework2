@@ -107,8 +107,6 @@ public class WeekCalendarFragment extends Fragment {
     private void takeWeekCalendar() { // *************** 이 함수는 요일 밑에 한 줄을 나타냄, 일주일씩만 출력함
         // *************** 주간 출력 함수 다시 만들어야 함 ***************
         cal.set(year, month, 1);
-        ActionBar actionBar =((MainActivity)getActivity()).getSupportActionBar();
-        actionBar.setTitle(cal.get(Calendar.YEAR)+"년"+(cal.get(Calendar.MONTH)+1)+"월");
         if(week%5==5) {
             for(int i=0; i<=7; i++){
                 days_1.add(Integer.toString(i));

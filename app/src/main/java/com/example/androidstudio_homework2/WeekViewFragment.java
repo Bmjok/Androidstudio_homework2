@@ -2,6 +2,7 @@ package com.example.androidstudio_homework2;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -67,15 +68,24 @@ public class WeekViewFragment extends Fragment {
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         week = cal.get(Calendar.WEEK_OF_MONTH);
+        ActionBar ab =((MainActivity)getActivity()).getSupportActionBar();
 
         View rootView = inflater.inflate(R.layout.fragment_weekview,
                 container, false);
         ViewPager2 vpPager = rootView.findViewById(R.id.week_vpPager);
         FragmentStateAdapter adapter = new WeekViewAdapter(this);
         vpPager.setAdapter(adapter);
-        vpPager.setCurrentItem(500,false);
-        //왼쪽 스와이프를 위해 페이지 50설정
-
+        vpPager.setCurrentItem(week,false);
+        vpPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                int week = position;
+                year = cal.get(Calendar.YEAR)+month/12;
+                month = cal.get(Calendar.MONTH)+week/6;
+                ab.setTitle(year+"년"+(month+1)+"월");
+            }
+        });
         return rootView;
     }
 }

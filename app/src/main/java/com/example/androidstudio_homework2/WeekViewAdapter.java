@@ -26,7 +26,6 @@ public class WeekViewAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         Calendar cal = Calendar.getInstance();
-        position = position-(NUM_ITEMS/2);
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         //스와이프된 년과 월
