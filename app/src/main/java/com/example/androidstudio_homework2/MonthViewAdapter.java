@@ -28,17 +28,18 @@ public class MonthViewAdapter extends FragmentStateAdapter {
         //계산 수정할거임!!!!! 왜 딜레이가 걸릴까요?
         //https://furang-note.tistory.com/29
         position = position-(NUM_ITEMS/2); //캘린더 위치 식별을 편하게 하기 위해
-        int s_p = position+month; //스와이프에 따른 year, month 변화를 나타내기 위한 변수
+        int s_p = (position+month)%12;
+        int sp = (position+month)/12;
         int p_year;
         int p_month;
         //스와이프된 년과 월
-        if((s_p%12)<0) { //왼쪽으로 스와이프해서 년도가 바뀌었을 때
-            p_year = year+(s_p/12)-1;
-            p_month = 12+(s_p%12);
+        if(s_p<0) { //왼쪽으로 스와이프해서 년도가 바뀌었을 때
+            p_year = year+sp-1;
+            p_month = 12+s_p;
         }
         else { //오른쪽으로 스와이프 or 왼쪽으로 스와이프 했는데 년도는 그대로 일 때(현재 1월이 아닌 경우)
-            p_year = year+(s_p/12);
-            p_month = s_p%12;
+            p_year = year+sp;
+            p_month = s_p;
         }
         //MonthCalendarFragment의 Instance메소드를 통해 스와이프 한 year과 month 반환
         return MonthCalendarFragment.newInstance(p_year, p_month);
