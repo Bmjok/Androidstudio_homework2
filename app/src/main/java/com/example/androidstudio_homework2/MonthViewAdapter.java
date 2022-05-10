@@ -27,9 +27,9 @@ public class MonthViewAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         //계산 수정할거임!!!!! 왜 딜레이가 걸릴까요?
         //https://furang-note.tistory.com/29
-        position = position-(NUM_ITEMS/2); //캘린더 위치 식별을 편하게 하기 위해
-        int sp_m = (position+month)%12; //month (0~11 or -1~-12)
-        int sp_y = (position+month)/12; //year (...-2 -> -1 -> 0 (현재) -> 1 -> 2...)
+        position = position-(NUM_ITEMS/2)+month; //캘린더 위치 식별을 편하게 하기 위해
+        int sp_m = position%12; //month (0~11 or -1~-12)
+        int sp_y = position/12; //year (...-2 -> -1 -> 0 (현재) -> 1 -> 2...)
         int p_year;
         int p_month;
         //스와이프된 년과 월
