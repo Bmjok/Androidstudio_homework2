@@ -28,12 +28,14 @@ public class MonthViewAdapter extends FragmentStateAdapter {
         //계산 수정할거임!!!!! 왜 딜레이가 걸릴까요?
         //https://furang-note.tistory.com/29
         position = position-(NUM_ITEMS/2)+month; //캘린더 위치 식별을 편하게 하기 위해
-        int sp_m = position%12; //month (0~11 or -1~-12)
+        int sp_m = position%12; //month (0~11)
         int sp_y = position/12; //year (...-2 -> -1 -> 0 (현재) -> 1 -> 2...)
         int p_year;
         int p_month;
         //스와이프된 년과 월
         if(sp_m<0) { //왼쪽으로 스와이프해서 년도가 바뀌었을 때
+            //나머지가 마이너스 나올 수 있음
+            //https://johngrib.github.io/wiki/java-remainder-operator/
             p_year = year+sp_y-1;
             p_month = 12+sp_m;
         }
