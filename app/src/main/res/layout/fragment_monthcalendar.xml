@@ -95,7 +95,9 @@
             android:horizontalSpacing="2dp"
             android:stretchMode="columnWidth"
             android:background="@color/purple_500"
-            android:gravity="center" />
+            android:gravity="center"
+            android:listSelector="@color/teal_200"
+            android:drawSelectorOnTop="true"/>
 
     </LinearLayout>
 
