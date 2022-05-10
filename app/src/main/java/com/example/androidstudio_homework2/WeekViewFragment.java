@@ -82,7 +82,7 @@ public class WeekViewFragment extends Fragment {
                 super.onPageSelected(position);
                 int week = position;
                 year = cal.get(Calendar.YEAR)+month/12;
-                month = cal.get(Calendar.MONTH)+week/6;
+                month = cal.get(Calendar.MONTH)+week/5;
                 ab.setTitle(year+"년"+(month+1)+"월");
             }
         });
