@@ -83,6 +83,7 @@ public class WeekCalendarFragment extends Fragment {
         //화면에 뿌리는건 days_2번을 뿌려야함!!
 
         WeekCalendarAdapter WeekCal;
+        //[가로세로 로테이션] 출처: https://faith-developer.tistory.com/10
         //가로모드일 때
         if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
                 == Surface.ROTATION_90||getActivity().getWindowManager().getDefaultDisplay().getRotation()== Surface.ROTATION_270){
@@ -96,7 +97,7 @@ public class WeekCalendarFragment extends Fragment {
         week_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(getActivity(), "position = "+days_1.get(position%7-1),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "position = "+days_1.get(position%7),Toast.LENGTH_SHORT).show();
                 // *************** 토스트 메시지 date 부분 수정 ***************
                 // 선택된 격자의 position을 나타내야함. (날짜랑은 다름)
             }
