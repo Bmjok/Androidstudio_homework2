@@ -75,14 +75,14 @@ public class WeekViewFragment extends Fragment {
         ViewPager2 vpPager = rootView.findViewById(R.id.week_vpPager);
         FragmentStateAdapter adapter = new WeekViewAdapter(this);
         vpPager.setAdapter(adapter);
-        vpPager.setCurrentItem(week-1,false);
+        vpPager.setCurrentItem(week,false);
         vpPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 int week = position;
                 year = cal.get(Calendar.YEAR)+month/12;
-                month = cal.get(Calendar.MONTH)+week/5;
+                month = cal.get(Calendar.MONTH)+week/6;
                 ab.setTitle(year+"년"+(month+1)+"월");
             }
         });

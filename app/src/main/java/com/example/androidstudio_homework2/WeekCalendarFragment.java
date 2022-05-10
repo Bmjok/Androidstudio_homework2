@@ -129,32 +129,32 @@ public class WeekCalendarFragment extends Fragment {
             days_1.add(" ");
         } //마지막 부분 공백 출력(월이 바로 바뀌면 안됨)
 
-        if(week==0) { //첫째주 (여기서 i는 날짜가 아니고 인덱스임!)
+        if(week==1) {
             for(i=0; i<=6; i++) {
                 days_2.add(days_1.get(i)); //1번 배열에 있는 i번째를 2번 배열에 추가해서 출력하는 방식
             }
         }
-        else if(week==1) { //둘째주
+        else if(week==2) { //둘째주
             for(i=7; i<=13; i++) {
                 days_2.add(days_1.get(i));
             }
         }
-        else if(week==2) { //셋째주
+        else if(week==3) { //셋째주
             for(i=14; i<=20; i++) {
                 days_2.add(days_1.get(i));
             }
         }
-        else if(week==3) { //넷째주
+        else if(week==4) { //넷째주
             for(i=21; i<=27; i++) {
                 days_2.add(days_1.get(i));
             }
         }
-        else if(week==4) { //다섯째주
+        else if(week==5) { //다섯째주
             for(i=28; i<=34; i++) {
                 days_2.add(days_1.get(i));
             }
         } //배열의 크기보다 커져서 오류 발생
-        else if(week==5) { //여섯째주
+        else if(week==6) { //여섯째주
             for(i=35; i<(start_day+finish_day-1); i++) {
                 days_2.add(days_1.get(i));
             }
