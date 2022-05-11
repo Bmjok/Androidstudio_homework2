@@ -28,6 +28,7 @@ public class MonthViewAdapter extends FragmentStateAdapter {
         //계산 수정할거임!!!!! 왜 딜레이가 걸릴까요?
         //https://furang-note.tistory.com/29
         position = position-(NUM_ITEMS/2)+month; //캘린더 위치 식별을 편하게 하기 위해
+        //position의 기준이 현재 년도의 현재 월이 될 수 있도록 함
         //https://johngrib.github.io/wiki/java-remainder-operator/
         //몫과 나머지가 마이너스로 출력될 수 있음
         int sp_m = position%12; //month (0~11)
@@ -35,11 +36,12 @@ public class MonthViewAdapter extends FragmentStateAdapter {
         int p_year;
         int p_month;
         //스와이프된 년과 월
-        if(sp_m<0) { //왼쪽으로 스와이프해서 년도가 바뀌었을 때
+        if(sp_m<0) { //왼쪽으로 스와이프해서 년도가 바뀌었을 때 (22년 5월 기준으로 == position이 -46 부터 -1까지)
             p_year = year+sp_y-1;
             p_month = 12+sp_m;
         }
         else { //오른쪽으로 스와이프 or 왼쪽으로 스와이프 했는데 년도는 그대로 일 때(현재 1월이 아닌 경우)
+            //22년 5월 기준으로 == position이 0부터 54까지
             p_year = year+sp_y;
             p_month = sp_m;
         }

@@ -68,6 +68,7 @@ public class WeekViewFragment extends Fragment {
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         week = cal.get(Calendar.WEEK_OF_MONTH);
+        //https://royzero.tistory.com/4
         ActionBar ab =((MainActivity)getActivity()).getSupportActionBar();
 
         View rootView = inflater.inflate(R.layout.fragment_weekview,
@@ -75,7 +76,7 @@ public class WeekViewFragment extends Fragment {
         ViewPager2 vpPager = rootView.findViewById(R.id.week_vpPager);
         FragmentStateAdapter adapter = new WeekViewAdapter(this);
         vpPager.setAdapter(adapter);
-        vpPager.setCurrentItem(week,false);
+        vpPager.setCurrentItem(week-1,false);
         vpPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {

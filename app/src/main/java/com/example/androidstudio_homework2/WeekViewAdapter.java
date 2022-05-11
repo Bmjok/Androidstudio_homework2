@@ -19,18 +19,19 @@ public class WeekViewAdapter extends FragmentStateAdapter {
         Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
-        days = cal.get(Calendar.DATE);
+        week = cal.get(Calendar.WEEK_OF_MONTH);
     } //year와 month를 현재 날짜로 초기화
 
     // 각 페이지를 나타내는 프래그먼트 반환
     @Override
     public Fragment createFragment(int position) {
-        Calendar cal = Calendar.getInstance();
-        year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
-        //스와이프된 년과 월
+        int n_year;
+        int n_month;
+        n_year = position%52;
+        n_month = position%12;
+        position = position%6;
         int week = position;
-        return WeekCalendarFragment.newInstance(year, month, week);
+        return WeekCalendarFragment.newInstance(n_year, n_month, week);
     }
 
     // 전체 페이지 개수 반환
