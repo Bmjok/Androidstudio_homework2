@@ -63,6 +63,9 @@ public class WeekCalendarFragment extends Fragment {
             year = getArguments().getInt(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
             week = getArguments().getInt(ARG_PARAM3);
+            //https://royzero.tistory.com/4
+            ActionBar ab =((MainActivity)getActivity()).getSupportActionBar();
+            ab.setTitle(year+"년"+(month+1)+"월");
         }
     }
 

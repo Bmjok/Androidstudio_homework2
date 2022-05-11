@@ -25,12 +25,17 @@ public class WeekViewAdapter extends FragmentStateAdapter {
     // 각 페이지를 나타내는 프래그먼트 반환
     @Override
     public Fragment createFragment(int position) {
+        int w_sp_y = position/52;
+        int w_sp_m = position/6;
         int n_year;
         int n_month;
-        n_year = position%52;
-        n_month = position%12;
-        position = position%6;
-        int week = position;
+        int week;
+        position = position%6; //week는 0~5로 총 6주를 나타내야 함.
+
+        n_year = year+w_sp_y;
+        n_month = month+w_sp_m;
+
+        week = position;
         return WeekCalendarFragment.newInstance(n_year, n_month, week);
     }
 
