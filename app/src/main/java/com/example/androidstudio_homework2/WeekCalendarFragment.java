@@ -37,7 +37,6 @@ public class WeekCalendarFragment extends Fragment {
     int year;
     int month;
     int week;
-    public static int day;
     Calendar cal;
 
     public WeekCalendarFragment() {
@@ -71,10 +70,9 @@ public class WeekCalendarFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        cal = Calendar.getInstance();
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_weekcalendar, container, false);
-
-        cal = Calendar.getInstance();
 
         GridView W_gridview = (GridView)rootView.findViewById(R.id.gridview);
         GridView week_gridview = (GridView)rootView.findViewById(R.id.week_gridview);
@@ -84,7 +82,6 @@ public class WeekCalendarFragment extends Fragment {
 
         WeekCalendarAdapter W2 = new WeekCalendarAdapter(getActivity(), android.R.layout.simple_list_item_1, days_2);
         //화면에 뿌리는건 days_2번을 뿌려야함!!
-
         WeekCalendarAdapter WeekCal;
         //[가로세로 로테이션] 출처: https://faith-developer.tistory.com/10
         //가로모드일 때

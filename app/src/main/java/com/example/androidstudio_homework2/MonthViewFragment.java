@@ -72,17 +72,13 @@ public class MonthViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        cal = Calendar.getInstance();
-        year=cal.get(Calendar.YEAR);
-        month= cal.get(Calendar.MONTH);
-
         View rootView = inflater.inflate(R.layout.fragment_monthview,
                 container, false);
         ViewPager2 vpPager = rootView.findViewById(R.id.vpPager);
         FragmentStateAdapter adapter = new MonthViewAdapter(this);
         vpPager.setAdapter(adapter);
         vpPager.setCurrentItem(50,false);
-        //왼쪽 스와이프를 위해 페이지 50설정
+        //이전 달력 출력을 위해(왼쪽 스와이프) 페이지 50설정
 
         return rootView;
     }

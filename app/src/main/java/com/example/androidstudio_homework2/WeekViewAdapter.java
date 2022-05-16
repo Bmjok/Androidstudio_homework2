@@ -11,15 +11,12 @@ public class WeekViewAdapter extends FragmentStateAdapter {
     //스와이프 횟수는 넉넉하게 1000번 잡음(week는 month보다 더 많으니까)
     private int year;
     private int month;
-    private int days;
-    private int week;
 
     public WeekViewAdapter(Fragment fa) {
         super(fa);
         Calendar cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
-        week = cal.get(Calendar.WEEK_OF_MONTH);
     } //year와 month를 현재 날짜로 초기화
 
     // 각 페이지를 나타내는 프래그먼트 반환

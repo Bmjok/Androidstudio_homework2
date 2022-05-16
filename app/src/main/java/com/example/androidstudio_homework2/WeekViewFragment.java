@@ -20,8 +20,6 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class WeekViewFragment extends Fragment {
-
-    ArrayList<String> days = new ArrayList<>();
     Calendar cal = Calendar.getInstance();
 
     int year;
@@ -33,8 +31,6 @@ public class WeekViewFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String ARG_PARAM3 = "param2";
-
-    private String day;
 
     public WeekViewFragment() {
         // Required empty public constructor

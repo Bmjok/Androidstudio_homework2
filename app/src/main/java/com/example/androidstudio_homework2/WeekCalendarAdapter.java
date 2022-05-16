@@ -22,16 +22,13 @@ public class WeekCalendarAdapter extends BaseAdapter {
     Calendar cal;
     int i;
 
-    public WeekCalendarAdapter(Context context)
-    {
+    public WeekCalendarAdapter(Context context) {
         this.context = context;
     }
-
     public WeekCalendarAdapter(Context context,ArrayList<String> days){
         this.context =context;
         this.days=days;
     }
-
     public WeekCalendarAdapter(Context context, int resource, ArrayList<String> days){
         this.context=context;
         this.mResource=resource;
@@ -71,16 +68,11 @@ public class WeekCalendarAdapter extends BaseAdapter {
 
         TextView day = (TextView) convertView;
         day.setText(days.get(position)); //text<->string
-        day.setGravity(Gravity.CENTER_HORIZONTAL| Gravity.TOP);
+        //day.setGravity(Gravity.CENTER_HORIZONTAL| Gravity.TOP);
         //출처:https://arabiannight.tistory.com/60
         day.setBackground(ContextCompat.getDrawable(
                 context, R.drawable.gridview_selet
         ));
-        //오류가 생겼던 이유: 월간 달력에서 만들어 왔던 걸 주간에도 그대로 썼었네요...
-        //GridView.LayoutParams params = new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, I);
-        //day.setLayoutParams(params);
-        //당연히 안됐었어요...
-        //이부분 수정했습니다!
 
         return day;
     }

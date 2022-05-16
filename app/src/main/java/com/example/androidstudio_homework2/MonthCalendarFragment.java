@@ -30,7 +30,6 @@ public class MonthCalendarFragment extends Fragment {
 
     int year;
     int month;
-    public static int day;
     Calendar cal;
 
     public MonthCalendarFragment() {
@@ -45,11 +44,6 @@ public class MonthCalendarFragment extends Fragment {
         args.putInt(ARG_PARAM2, month);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    // 인터페이스 추가 정의
-    public interface OnTitleSelectedListener {
-        public void onTitleSelected(int y, int m, int d);
     }
 
     @Override
@@ -67,17 +61,14 @@ public class MonthCalendarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        cal = Calendar.getInstance();
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_monthcalendar, container, false);
-
-        cal = Calendar.getInstance();
-
         GridView gridview = (GridView)rootView.findViewById(R.id.gridview);
 
         takeCalendar();
 
         MonthCalendarAdapter MonthCal;
-
         //가로모드일 때
         if(getActivity().getWindowManager().getDefaultDisplay().getRotation()
                 == Surface.ROTATION_90||getActivity().getWindowManager().getDefaultDisplay().getRotation()== Surface.ROTATION_270){

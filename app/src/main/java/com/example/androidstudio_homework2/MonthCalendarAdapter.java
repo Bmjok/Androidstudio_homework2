@@ -26,11 +26,9 @@ public class MonthCalendarAdapter extends BaseAdapter {
     Calendar cal;
     int i;
 
-    public MonthCalendarAdapter(Context context)
-    {
+    public MonthCalendarAdapter(Context context) {
         this.context = context;
     }
-
     public MonthCalendarAdapter(Context context,ArrayList<String> days){
         this.context =context;
         this.days=days;

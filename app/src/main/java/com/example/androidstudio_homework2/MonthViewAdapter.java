@@ -11,7 +11,6 @@ public class MonthViewAdapter extends FragmentStateAdapter {
     //스와이프 동작에 따른 어댑터
     private static int NUM_ITEMS=100;
     //스와이프 횟수는 넉넉하게 100번 잡음
-    //NUM_ITEMS 숫자 변경시 아래 position 값과, MonthViewFragment 내부 setCurrentItem 값도 변경해야 함.
     private int year;
     private int month;
 
@@ -25,14 +24,13 @@ public class MonthViewAdapter extends FragmentStateAdapter {
     // 각 페이지를 나타내는 프래그먼트 반환
     @Override
     public Fragment createFragment(int position) {
-        //계산 수정할거임!!!!! 왜 딜레이가 걸릴까요?
         //https://furang-note.tistory.com/29
         position = position-(NUM_ITEMS/2)+month; //캘린더 위치 식별을 편하게 하기 위해
         //position의 기준이 현재 년도의 현재 월이 될 수 있도록 함
         //https://johngrib.github.io/wiki/java-remainder-operator/
         //몫과 나머지가 마이너스로 출력될 수 있음
-        int sp_m = position%12; //month (0~11)
-        int sp_y = position/12; //year (...-2 -> -1 -> 0 (현재) -> 1 -> 2...)
+        int sp_m = position%12;
+        int sp_y = position/12;
         int p_year;
         int p_month;
         //스와이프된 년과 월
