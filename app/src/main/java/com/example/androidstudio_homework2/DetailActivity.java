@@ -1,5 +1,6 @@
 package com.example.androidstudio_homework2;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -18,6 +19,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Calendar;
+
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final int REQUEST_PERMISSIONS_FOR_LAST_KNOWN_LOCATION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -27,6 +30,10 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        //액션바 이름 변경
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle("CalendarApp");
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
