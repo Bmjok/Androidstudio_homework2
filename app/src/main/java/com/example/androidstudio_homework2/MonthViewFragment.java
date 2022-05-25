@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -79,6 +81,15 @@ public class MonthViewFragment extends Fragment {
         vpPager.setAdapter(adapter);
         vpPager.setCurrentItem(50,false);
         //이전 달력 출력을 위해(왼쪽 스와이프) 페이지 50설정
+
+        //floating button 추가
+        FloatingActionButton fab = rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         return rootView;
     }

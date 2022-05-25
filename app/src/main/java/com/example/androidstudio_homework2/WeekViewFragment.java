@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -70,6 +72,16 @@ public class WeekViewFragment extends Fragment {
         FragmentStateAdapter adapter = new WeekViewAdapter(this);
         vpPager.setAdapter(adapter);
         vpPager.setCurrentItem(week-1,false);
+
+        //floating button 추가
+        FloatingActionButton fab = rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return rootView;
     }
 }
