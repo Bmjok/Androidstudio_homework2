@@ -3,6 +3,7 @@ package com.example.androidstudio_homework2;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -87,7 +88,8 @@ public class MonthViewFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                startActivity(intent);
             }
         });
 
