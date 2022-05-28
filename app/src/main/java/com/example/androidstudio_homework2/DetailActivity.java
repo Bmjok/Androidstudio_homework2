@@ -78,7 +78,6 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         year = intent.getIntExtra("year",0);
         month =intent.getIntExtra("month",0);
         day = intent.getIntExtra("day",0);
-        String showDay = intent.getStringExtra("title");
         title.setText(year + "년" + month + "월" + day + "일");
 
         Button save = (Button)findViewById(R.id.save);
