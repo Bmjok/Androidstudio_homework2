@@ -86,51 +86,86 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         month =intent.getIntExtra("month",0);
         day = intent.getIntExtra("day",0);
         title.setText(year + "년" + month + "월" + day + "일");
+        String schedule = intent.getStringExtra("title");
 
         Button save = (Button)findViewById(R.id.save);
-        save.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View view) {
-                insertRecord();
-                Toast.makeText(DetailActivity.this.getApplicationContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
-
         Button cancel = (Button)findViewById(R.id.cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
         Button delete = (Button)findViewById(R.id.delete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //https://saeatechnote.tistory.com/
-                AlertDialog.Builder dlg = new AlertDialog.Builder(DetailActivity.this);
-                dlg.setTitle("삭제").setMessage("삭제하시겠습니까?");
-                dlg.setPositiveButton("네", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteRecord();
-                        Toast.makeText(DetailActivity.this.getApplicationContext(), "삭제되었습니다", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
-                dlg.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //아무 일도 일어나지 않음
-                    }
-                });
-                AlertDialog alertDialog = dlg.create();
-                alertDialog.show();
-            }
-        });
+
+        if(schedule != null) { //이미 저장된 데이터
+
+            save.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public void onClick(View view) { //이미 저장->다시 저장==수정(코드 추가 예정)
+                    Toast.makeText(DetailActivity.this.getApplicationContext(), "수정되었습니다", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(DetailActivity.this.getApplicationContext(), "취소하였습니다", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+
+            delete.setOnClickListener(new View.OnClickListener() { //이미 저장->삭제 가능
+                @Override
+                public void onClick(View view) {
+                    //https://saeatechnote.tistory.com/
+                    AlertDialog.Builder dlg = new AlertDialog.Builder(DetailActivity.this);
+                    dlg.setTitle("삭제").setMessage("삭제하시겠습니까?");
+                    dlg.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deleteRecord();
+                            Toast.makeText(DetailActivity.this.getApplicationContext(), "삭제되었습니다", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                    dlg.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //아무 일도 일어나지 않음
+                        }
+                    });
+                    AlertDialog alertDialog = dlg.create();
+                    alertDialog.show();
+                }
+            });
+
+        }
+        else { //데이터를 처음 추가할 때
+
+            save.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public void onClick(View view) {
+                    insertRecord(); //데이터 업데이트
+                    Toast.makeText(DetailActivity.this.getApplicationContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(DetailActivity.this.getApplicationContext(), "취소하였습니다", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) { //삭제 없이 바로 종료
+                    Toast.makeText(DetailActivity.this.getApplicationContext(), "종료되었습니다", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+
+        }
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
