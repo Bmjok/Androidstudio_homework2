@@ -44,8 +44,8 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
     EditText title;
     String show_day;
-    TimePicker start_day;
-    TimePicker finish_day;
+    TimePicker startPicker;
+    TimePicker endPicker;
     Button findLocation;
     EditText address ;
     TextView memo;
@@ -67,8 +67,8 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         //DB 연결
         mDbHelper = new DBHelper(this);
         title = findViewById(R.id.title);
-        start_day = findViewById(R.id.start_day);
-        finish_day = findViewById(R.id.finish_day);
+        startPicker = findViewById(R.id.start_day);
+        endPicker = findViewById(R.id.finish_day);
         findLocation = findViewById(R.id.findLocation);
         address = findViewById(R.id.address);
         memo = findViewById(R.id.memo);
@@ -131,9 +131,9 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void insertRecord() {
-        Integer.toString(start_day.getHour());
-        String start_day_hour = Integer.toString(start_day.getHour());
-        String finish_day_hour = Integer.toString(finish_day.getHour());
+        Integer.toString(startPicker.getHour());
+        String start_day_hour = Integer.toString(startPicker.getHour());
+        String finish_day_hour = Integer.toString(endPicker.getHour());
         mDbHelper.insertUserBySQL(show_day, title.getText().toString(),
                 start_day_hour,finish_day_hour,address.getText().toString(),memo.getText().toString());
     }
