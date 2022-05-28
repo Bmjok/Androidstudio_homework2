@@ -11,9 +11,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,15 +31,19 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
-    private static final int REQUEST_PERMISSIONS_FOR_LAST_KNOWN_LOCATION = 1;
+    private static final int REQUEST_PERMISSIONS_FOR_LAST_KNOWN_LOCATION = 0;
     private FusedLocationProviderClient mFusedLocationClient;
     private Location mLocation;
     private DBHelper mDbHelper;
@@ -165,7 +172,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                 mLocation = location; //현재위치
                 SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
-                mapFragment.getMapAsync(DetailActivity.this);
+                mapFragment.getMapAsync(DetailActivity.this::onMapReady);
 
                 // 4. 마지막으로 알려진 위치(location 객체)를 얻음.
                 if (location != null) {
@@ -186,6 +193,36 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         //latitude, longitude == 현재위치 받아오기
         // move the camera
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(nowLocation, 15));
+
+        findLocation.setOnClickListener(new Button.OnClickListener() { //찾기 버튼
+            Address bestResult;
+            @Override
+            public void onClick(View view) {
+                try {
+                    Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.KOREA);
+                    String input = address.getText().toString();
+                    List<Address> addresses = geocoder.getFromLocationName(input,1);
+                    if (addresses.size() >0) {
+                        bestResult = (Address) addresses.get(0);
+                    }
+                } catch (IOException e) {
+                    Log.e(getClass().toString(),"Failed in using Geocoder.", e);
+                    return;
+                }
+                Double latitude = bestResult.getLatitude();
+                Double longitude = bestResult.getLongitude();
+
+                LatLng point = new LatLng(latitude,longitude);
+                MarkerOptions mOptions = new MarkerOptions();
+                mOptions.title("search result");
+                googleMap.addMarker(
+                        new MarkerOptions().
+                                position(point).
+                                title(""));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point,15));
+            }
+        });
+
     }
 
 }
