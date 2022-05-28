@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -100,6 +102,19 @@ public class WeekCalendarFragment extends Fragment {
                 Toast.makeText(getActivity(), "position = "+days_1.get(position%7),Toast.LENGTH_SHORT).show();
                 // *************** 토스트 메시지 date 부분 수정 ***************
                 // 선택된 격자의 position을 나타내야함. (날짜랑은 다름)
+            }
+        });
+
+        //floating button 추가
+        FloatingActionButton fab = rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("year", year);
+                intent.putExtra("month", month+1);
+
+                startActivity(intent);
             }
         });
 

@@ -29,7 +29,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/show_day"
+                android:id="@+id/title"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="50dp"
-                android:id="@+id/edit_location"
+                android:id="@+id/address"
                 android:layout_weight="1"
                 android:hint="장소"/>
             <Button
@@ -106,32 +106,38 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginLeft="20dp"
-                android:id="@+id/edit_memo"
+                android:id="@+id/memo"
                 android:layout_weight="1"
                 android:hint="메모"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="130dp">
+
             <Button
+                android:id="@+id/save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
                 android:layout_weight="1"
-                android:text="저장"
-                android:id="@+id/save"/>
+                android:text="저장" />
+
             <Button
+                android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
                 android:layout_weight="1"
-                android:text="취소"
-                android:id="@+id/cancel"/>
+                android:text="취소" />
+
             <Button
+                android:id="@+id/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
                 android:layout_weight="1"
-                android:text="삭제"
-                android:id="@+id/delete"/>
+                android:text="삭제" />
         </LinearLayout>
 
     </LinearLayout>

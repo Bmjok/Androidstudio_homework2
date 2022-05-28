@@ -74,16 +74,6 @@ public class WeekViewFragment extends Fragment {
         vpPager.setAdapter(adapter);
         vpPager.setCurrentItem(week-1,false);
 
-        //floating button 추가
-        FloatingActionButton fab = rootView.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                startActivity(intent);
-            }
-        });
-
         return rootView;
     }
 }

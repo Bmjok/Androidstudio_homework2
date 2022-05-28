@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,11 +33,13 @@ public class MonthViewFragment extends Fragment {
 
     int year;
     int month;
+    int day;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
+    private static final String ARG_PARAM3 = "day";
 
     public MonthViewFragment() {
         // Required empty public constructor
@@ -51,13 +54,14 @@ public class MonthViewFragment extends Fragment {
      * @return A new instance of fragment MonthViewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MonthViewFragment newInstance(int year, int month) {
+    public static MonthViewFragment newInstance(int year, int month, int day) {
         //매개변수로 년도와 월을 받음
         MonthViewFragment fragment = new MonthViewFragment();
         Bundle args = new Bundle();
         Calendar.getInstance().set(YEAR, MONTH);
         args.putInt(ARG_PARAM1, year);
         args.putInt(ARG_PARAM2, month);
+        args.putInt(ARG_PARAM3, day);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,6 +72,7 @@ public class MonthViewFragment extends Fragment {
         if (getArguments() != null) {
             year = getArguments().getInt(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
+            day = getArguments().getInt(ARG_PARAM3);
         }
     }
 
@@ -82,16 +87,6 @@ public class MonthViewFragment extends Fragment {
         vpPager.setAdapter(adapter);
         vpPager.setCurrentItem(50,false);
         //이전 달력 출력을 위해(왼쪽 스와이프) 페이지 50설정
-
-        //floating button 추가
-        FloatingActionButton fab = rootView.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                startActivity(intent);
-            }
-        });
 
         return rootView;
     }

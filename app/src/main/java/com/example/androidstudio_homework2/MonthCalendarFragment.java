@@ -3,6 +3,7 @@ package com.example.androidstudio_homework2;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -17,6 +18,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -83,6 +86,19 @@ public class MonthCalendarFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 String date = MonthCal.getItem(position);
                 Toast.makeText(getActivity(), (month+1)+"월 "+date+"일",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //floating button 추가
+        FloatingActionButton fab = rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("year", year);
+                intent.putExtra("month", month+1);
+
+                startActivity(intent);
             }
         });
 
