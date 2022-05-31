@@ -102,11 +102,9 @@ public class WeekCalendarFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Toast.makeText(getActivity(), "position = " + position,Toast.LENGTH_SHORT).show();
-                // *************** 토스트 메시지 date 부분 수정 ***************
-                // 선택된 격자의 position을 나타내야함. (날짜랑은 다름)
 
                 date2 = Integer.parseInt(days_2.get(position%7));
-                hour = (position/7);
+                hour = (position/7); //주간 달력은 선택된 시간 불러오기
             }
         });
 

@@ -3,6 +3,7 @@ package com.example.androidstudio_homework2;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -32,7 +33,7 @@ import java.util.Calendar;
 public class MonthCalendarFragment extends Fragment {
     //MonthCalendarFragment <-> MonthCalendarAdapter
     ArrayList<String> days = new ArrayList<>();
-    DBHelper mDbHelper;
+    private DBHelper mDbHelper;
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
@@ -67,6 +68,7 @@ public class MonthCalendarFragment extends Fragment {
             ActionBar ab = ((MainActivity)getActivity()).getSupportActionBar();
             ab.setTitle(year+"년"+(month+1)+"월");
         }
+        mDbHelper= new DBHelper(getActivity());
     }
 
     @Override
@@ -92,15 +94,55 @@ public class MonthCalendarFragment extends Fragment {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                //누르면->날짜 토스트메시지 출력
                 String date = MonthCal.getItem(position);
                 Toast.makeText(getActivity(), (month+1)+"월 "+date+"일",Toast.LENGTH_SHORT).show();
                 date2 = position - cal.get(Calendar.DAY_OF_WEEK)+2;
-                hour = cal.get(Calendar.HOUR);
+                hour = cal.get(Calendar.HOUR); //월간 달력은 현재 시간 받아오기
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
 
-                //*****************
-                AlertDialog.Builder dlg = new AlertDialog.Builder(getContext());
-                view.setSelected(true); //칸 선택
+                Cursor cursor = mDbHelper.getUserByDayOfSQL(year,(month+1),date2);
+                //(DetailActivity)show_day = year + "년" + month + "월" + day + "일";
 
+                ArrayList<String> schedule = new ArrayList<>(); //스케줄 저장 배열
+                ListView lv = (ListView)inflater.inflate(R.layout.dialog, null).findViewById(R.id.dialogView);
+                //스케줄을 나열할 리스트뷰 생성
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, schedule);
+                //ArrayAdapter 객체 생성, 리스트뷰에 나타낼 객체 '스케줄'을 넣는다.
+
+                //출처: https://hashcode.co.kr/questions/519/
+                //커서를 계속 반복해서 스케줄 객체 배열에 제목을 저장한다.
+                while(cursor.moveToNext()){ //계속 다음으로 이동, 마지막이면 false
+                    String sched = cursor.getString(2); //컬럼 값을 문자열로 구해서 sched에 저장. 2번 컬럼은 title
+                    schedule.add(sched); //스케줄 객체 배열에 저장한다. (제목을 저장)
+                } //마지막까지 검사하고 다음으로
+                if(cursor.moveToFirst() == true){ //데이터가 있을 때
+                    lv.setAdapter(adapter); //리스트뷰와 어댑터 연결
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() { //리스트뷰 선택시
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String title = schedule.get(position);
+                            Intent intent = new Intent(getActivity(), DetailActivity.class);
+                            intent.putExtra("title", title);
+                            //제목 전달
+                            startActivity(intent);
+                        }
+                    });
+                    //스케줄이 저장되어 있을 때만 다이얼로그 출력
+                    dialog.setTitle(year + "년" + (month+1) + "월" + date2 + "일");
+                    //출처: https://blog.naver.com/zion830/221274053542
+                    if (lv.getParent() != null)
+                        ((ViewGroup) lv.getParent()).removeView(lv);
+                    dialog.setView(lv);
+                    dialog.setNegativeButton("뒤로가기", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //뒤로가기
+                        }
+                    });
+                    AlertDialog alertDialog = dialog.create();
+                    alertDialog.show();
+                }
             }
         });
 
@@ -112,9 +154,8 @@ public class MonthCalendarFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("year", year);
                 intent.putExtra("month", month+1);
-                intent.putExtra("day", date2);
-                intent.putExtra("hour", hour);
-                //day 수정
+                intent.putExtra("day", date2); //선택된 날짜
+                intent.putExtra("hour", hour); //현재시간
 
                 startActivity(intent);
             }

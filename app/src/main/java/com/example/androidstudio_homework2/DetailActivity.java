@@ -18,8 +18,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -42,6 +46,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.zip.Inflater;
 
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final int REQUEST_PERMISSIONS_FOR_LAST_KNOWN_LOCATION = 0;
@@ -62,6 +67,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     int month;
     int day;
     int hour;
+    private Inflater inflater;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -89,6 +95,8 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         day = intent.getIntExtra("day", 0);
         hour = intent.getIntExtra("hour", 0);
         title.setText(year + "년" + month + "월" + day + "일" + hour + "시");
+        show_day = year + "년" + month + "월" + day + "일";
+        //(MonthCalendarFragment)Cursor cursor = mDbHelper.getUserByDayOfSQL(year,(month+1),date2);
         String schedule = intent.getStringExtra("title");
 
         Button save = (Button)findViewById(R.id.save);
@@ -99,20 +107,23 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
             Cursor cursor = mDbHelper.getUserByTitleOfSQL(schedule);
             cursor.moveToFirst();
-            title.setText(cursor.getString(3));
-            int startDate = Integer.parseInt(cursor.getString(4));
-            int endDate = Integer.parseInt(cursor.getString(5));
-            address.setText(cursor.getString(6));
-            memo.setText(cursor.getString(7));
 
-            startPicker.setHour(startDate);
-            endPicker.setHour(endDate);
+            if( cursor != null && cursor.moveToFirst() ){
+                title.setText(cursor.getString(2));
+                int startDate = Integer.parseInt(cursor.getString(3));
+                int endDate = Integer.parseInt(cursor.getString(4));
+                address.setText(cursor.getString(5));
+                memo.setText(cursor.getString(6));
+                startPicker.setHour(startDate);
+                endPicker.setHour(endDate);
+            }
 
             save.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
-                public void onClick(View view) { //이미 저장->다시 저장==수정(코드 추가 예정)
-                    Toast.makeText(DetailActivity.this.getApplicationContext(), "수정되었습니다", Toast.LENGTH_SHORT).show();
+                public void onClick(View view) {
+                    //updateRecord();
+                    Toast.makeText(DetailActivity.this.getApplicationContext(), "이미 저장된 일정입니다", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
@@ -120,7 +131,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(DetailActivity.this.getApplicationContext(), "취소하였습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity.this.getApplicationContext(), "취소되었습니다", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
@@ -129,9 +140,9 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                 @Override
                 public void onClick(View view) {
                     //https://saeatechnote.tistory.com/
-                    AlertDialog.Builder dlg = new AlertDialog.Builder(DetailActivity.this);
-                    dlg.setTitle("삭제").setMessage("삭제하시겠습니까?");
-                    dlg.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(DetailActivity.this);
+                    dialog.setTitle("삭제").setMessage("삭제하시겠습니까?");
+                    dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             deleteRecord();
@@ -139,13 +150,13 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                             finish();
                         }
                     });
-                    dlg.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //아무 일도 일어나지 않음
                         }
                     });
-                    AlertDialog alertDialog = dlg.create();
+                    AlertDialog alertDialog = dialog.create();
                     alertDialog.show();
                 }
             });
@@ -166,7 +177,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(DetailActivity.this.getApplicationContext(), "취소하였습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity.this.getApplicationContext(), "취소되었습니다", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
@@ -174,13 +185,12 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) { //삭제 없이 바로 종료
-                    Toast.makeText(DetailActivity.this.getApplicationContext(), "종료되었습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity.this.getApplicationContext(), "존재하지 않는 일정입니다", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
 
         }
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
     }
@@ -197,6 +207,15 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     private void deleteRecord() {
         mDbHelper.deleteUserBySQL(title.getText().toString());
     }
+
+//    @RequiresApi(api = Build.VERSION_CODES.M)
+//    private void updateRecord() {
+//        Integer.toString(startPicker.getHour());
+//        String start_day_hour = Integer.toString(startPicker.getHour());
+//        String finish_day_hour = Integer.toString(endPicker.getHour());
+//        mDbHelper.updateUserBySQL(title.getText().toString(),
+//                start_day_hour,finish_day_hour,address.getText().toString(),memo.getText().toString());
+//    }
 
     private void getLastLocation() {
         // 1. 위치 접근에 필요한 권한 검사 및 요청

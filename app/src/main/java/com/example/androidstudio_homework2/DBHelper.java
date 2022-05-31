@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.ArrayList;
-
 public class DBHelper extends SQLiteOpenHelper {
     final static String TAG = "SQLiteDBTest";
 
@@ -27,21 +25,6 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.i(TAG, getClass().getName() + ".onUpgrade()");
         db.execSQL(UserContract.Users.DELETE_TABLE);
         onCreate(db);
-    }
-
-    public Cursor getUserByDayOfSQL(int year, int month) {
-        String date= year + "/" +month;
-        String sql= String.format(
-                "SELECT * FROM %s WHERE %s = '%s'",
-                UserContract.Users.TABLE_NAME,
-                UserContract.Users.KEY_SHOW_DAY,
-                date);
-        return getReadableDatabase().rawQuery(sql,null);
-    }
-
-    public Cursor getAllUsersBySQL() {
-        String sql = "Select * FROM " + UserContract.Users.TABLE_NAME;
-        return getReadableDatabase().rawQuery(sql,null);
     }
 
     public void insertUserBySQL(String show_day, String title, String start_hour, String finish_hour,
@@ -64,11 +47,20 @@ public class DBHelper extends SQLiteOpenHelper {
                     finish_hour,
                     address,
                     memo);
-
             getWritableDatabase().execSQL(sql);
         } catch (SQLException e) {
             Log.e(TAG,"Error in inserting recodes");
         }
+    }
+
+    public Cursor getUserByDayOfSQL(int year,int month,int day) {
+        String date= year + "년" + month + "월" + day + "일";
+        String sql= String.format(
+                "SELECT * FROM %s WHERE %s = '%s'",
+                UserContract.Users.TABLE_NAME,
+                UserContract.Users.KEY_SHOW_DAY,
+                date);
+        return getReadableDatabase().rawQuery(sql,null);
     }
 
     public Cursor getUserByTitleOfSQL(String title) {
@@ -78,6 +70,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 UserContract.Users.KEY_TITLE,
                 title);
         return getReadableDatabase().rawQuery(sql,null);
+
     }
 
     public void deleteUserBySQL(String title) {
@@ -93,23 +86,20 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateUserBySQL(String show_day, String title, String start_hour, String finish_hour,
-                                String address, String memo) {
-        try {
-            String sql = String.format (
-                    "UPDATE  %s SET %s = '%s', %s = '%s' WHERE %s = '%s'",
-                    UserContract.Users.TABLE_NAME,
-                    UserContract.Users._ID,
-                    UserContract.Users.KEY_SHOW_DAY, show_day,
-                    UserContract.Users.KEY_TITLE, title,
-                    UserContract.Users.KEY_START_HOUR, start_hour,
-                    UserContract.Users.KEY_FINISH_HOUR, finish_hour,
-                    UserContract.Users.KEY_ADDRESS, address,
-                    UserContract.Users.KEY_MEMO, memo) ;
-            getWritableDatabase().execSQL(sql);
-        } catch (SQLException e) {
-            Log.e(TAG,"Error in updating recodes");
-        }
-    }
-
+//    public void updateUserBySQL(String title, String start_hour, String finish_hour,
+//                                String address, String memo) {
+//        try {
+//            String sql = String.format (
+//                    "UPDATE  %s SET %s = '%s', %s = '%s', %s = '%s', %s = '%s' WHERE %s = '%s'",
+//                    UserContract.Users.TABLE_NAME,
+//                    UserContract.Users.KEY_START_HOUR, start_hour,
+//                    UserContract.Users.KEY_FINISH_HOUR, finish_hour,
+//                    UserContract.Users.KEY_ADDRESS, address,
+//                    UserContract.Users.KEY_MEMO, memo,
+//                    UserContract.Users.KEY_TITLE, title) ;
+//            getWritableDatabase().execSQL(sql);
+//        } catch (SQLException e) {
+//            Log.e(TAG,"Error in updating recodes");
+//        }
+//    }
 }
