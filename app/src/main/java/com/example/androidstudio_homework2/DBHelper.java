@@ -1,14 +1,13 @@
 package com.example.androidstudio_homework2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Bundle;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     final static String TAG = "SQLiteDBTest";
@@ -30,7 +29,22 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertUserBySQL(String show_day, String title, String start_day, String finish_day,
+    public Cursor getUserByDayOfSQL(int year, int month) {
+        String date= year + "/" +month;
+        String sql= String.format(
+                "SELECT * FROM %s WHERE %s = '%s'",
+                UserContract.Users.TABLE_NAME,
+                UserContract.Users.KEY_SHOW_DAY,
+                date);
+        return getReadableDatabase().rawQuery(sql,null);
+    }
+
+    public Cursor getAllUsersBySQL() {
+        String sql = "Select * FROM " + UserContract.Users.TABLE_NAME;
+        return getReadableDatabase().rawQuery(sql,null);
+    }
+
+    public void insertUserBySQL(String show_day, String title, String start_hour, String finish_hour,
                                 String address, String memo) {
         try {
             String sql = String.format (
@@ -40,14 +54,14 @@ public class DBHelper extends SQLiteOpenHelper {
                     UserContract.Users._ID,
                     UserContract.Users.KEY_SHOW_DAY,
                     UserContract.Users.KEY_TITLE,
-                    UserContract.Users.KEY_START_DAY,
-                    UserContract.Users.KEY_FINISH_DAY,
+                    UserContract.Users.KEY_START_HOUR,
+                    UserContract.Users.KEY_FINISH_HOUR,
                     UserContract.Users.KEY_ADDRESS,
                     UserContract.Users.KEY_MEMO,
                     show_day,
                     title,
-                    start_day,
-                    finish_day,
+                    start_hour,
+                    finish_hour,
                     address,
                     memo);
 
@@ -55,16 +69,6 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (SQLException e) {
             Log.e(TAG,"Error in inserting recodes");
         }
-    }
-
-    public Cursor getUserByDateOfSQL(int year, int month, int day) {
-        String show_day= year + "/" +month+"/" + day;
-        String sql= String.format(
-                "SELECT * FROM %s WHERE %s = '%s'",
-                UserContract.Users.TABLE_NAME,
-                UserContract.Users.KEY_SHOW_DAY,
-                show_day);
-        return getReadableDatabase().rawQuery(sql,null);
     }
 
     public Cursor getUserByTitleOfSQL(String title) {
@@ -89,7 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateUserBySQL(String show_day, String title, String start_day, String finish_day,
+    public void updateUserBySQL(String show_day, String title, String start_hour, String finish_hour,
                                 String address, String memo) {
         try {
             String sql = String.format (
@@ -98,8 +102,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     UserContract.Users._ID,
                     UserContract.Users.KEY_SHOW_DAY, show_day,
                     UserContract.Users.KEY_TITLE, title,
-                    UserContract.Users.KEY_START_DAY, start_day,
-                    UserContract.Users.KEY_FINISH_DAY, finish_day,
+                    UserContract.Users.KEY_START_HOUR, start_hour,
+                    UserContract.Users.KEY_FINISH_HOUR, finish_hour,
                     UserContract.Users.KEY_ADDRESS, address,
                     UserContract.Users.KEY_MEMO, memo) ;
             getWritableDatabase().execSQL(sql);

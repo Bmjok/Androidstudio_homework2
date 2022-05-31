@@ -40,6 +40,8 @@ public class WeekCalendarFragment extends Fragment {
     int month;
     int week;
     Calendar cal;
+    int date2;
+    int hour;
 
     public WeekCalendarFragment() {
         // Required empty public constructor
@@ -99,9 +101,12 @@ public class WeekCalendarFragment extends Fragment {
         week_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(getActivity(), "position = "+days_1.get(position%7),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "position = " + position,Toast.LENGTH_SHORT).show();
                 // *************** 토스트 메시지 date 부분 수정 ***************
                 // 선택된 격자의 position을 나타내야함. (날짜랑은 다름)
+
+                date2 = Integer.parseInt(days_2.get(position%7));
+                hour = (position/7);
             }
         });
 
@@ -113,6 +118,9 @@ public class WeekCalendarFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("year", year);
                 intent.putExtra("month", month+1);
+                intent.putExtra("day", date2);
+                intent.putExtra("hour", hour);
+                //day 수정
 
                 startActivity(intent);
             }

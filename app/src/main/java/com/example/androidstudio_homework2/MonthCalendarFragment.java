@@ -3,7 +3,9 @@ package com.example.androidstudio_homework2;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -16,8 +18,10 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,6 +32,7 @@ import java.util.Calendar;
 public class MonthCalendarFragment extends Fragment {
     //MonthCalendarFragment <-> MonthCalendarAdapter
     ArrayList<String> days = new ArrayList<>();
+    DBHelper mDbHelper;
 
     private static final String ARG_PARAM1 = "year";
     private static final String ARG_PARAM2 = "month";
@@ -35,6 +40,8 @@ public class MonthCalendarFragment extends Fragment {
     int year;
     int month;
     Calendar cal;
+    int date2;
+    int hour;
 
     public MonthCalendarFragment() {
         // Required empty public constructor
@@ -87,6 +94,13 @@ public class MonthCalendarFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 String date = MonthCal.getItem(position);
                 Toast.makeText(getActivity(), (month+1)+"월 "+date+"일",Toast.LENGTH_SHORT).show();
+                date2 = position - cal.get(Calendar.DAY_OF_WEEK)+2;
+                hour = cal.get(Calendar.HOUR);
+
+                //*****************
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getContext());
+                view.setSelected(true); //칸 선택
+
             }
         });
 
@@ -98,6 +112,9 @@ public class MonthCalendarFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("year", year);
                 intent.putExtra("month", month+1);
+                intent.putExtra("day", date2);
+                intent.putExtra("hour", hour);
+                //day 수정
 
                 startActivity(intent);
             }

@@ -14,19 +14,19 @@ public final class UserContract {
     /* Inner class that defines the table contents */
     public static class Users implements BaseColumns {
         public static final String TABLE_NAME="Users";
-        public static final String KEY_TITLE = "title";
         public static final String KEY_SHOW_DAY = "showDay";
-        public static final String KEY_START_DAY = "startDay";
-        public static final String KEY_FINISH_DAY = "finishDay";
+        public static final String KEY_TITLE = "title";
+        public static final String KEY_START_HOUR = "startDay";
+        public static final String KEY_FINISH_HOUR = "finishDay";
         public static final String KEY_ADDRESS = "address";
         public static final String KEY_MEMO = "memo";
 
         public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (" +
                 _ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
-                KEY_TITLE + TEXT_TYPE + COMMA_SEP +
                 KEY_SHOW_DAY + TEXT_TYPE + COMMA_SEP +
-                KEY_START_DAY + TEXT_TYPE +  COMMA_SEP +
-                KEY_FINISH_DAY + TEXT_TYPE +  COMMA_SEP +
+                KEY_TITLE + TEXT_TYPE + COMMA_SEP +
+                KEY_START_HOUR + TEXT_TYPE +  COMMA_SEP +
+                KEY_FINISH_HOUR + TEXT_TYPE +  COMMA_SEP +
                 KEY_ADDRESS + TEXT_TYPE +  COMMA_SEP +
                 KEY_MEMO + TEXT_TYPE +  " )";
 

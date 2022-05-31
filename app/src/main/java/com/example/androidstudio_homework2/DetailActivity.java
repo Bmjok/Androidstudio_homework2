@@ -37,6 +37,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +61,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     int year;
     int month;
     int day;
+    int hour;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -83,9 +85,10 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         //인텐트 선언, 년 월 일 받기
         Intent intent = getIntent();
         year = intent.getIntExtra("year",0);
-        month =intent.getIntExtra("month",0);
-        day = intent.getIntExtra("day",0);
-        title.setText(year + "년" + month + "월" + day + "일");
+        month = intent.getIntExtra("month",0);
+        day = intent.getIntExtra("day", 0);
+        hour = intent.getIntExtra("hour", 0);
+        title.setText(year + "년" + month + "월" + day + "일" + hour + "시");
         String schedule = intent.getStringExtra("title");
 
         Button save = (Button)findViewById(R.id.save);
@@ -93,6 +96,17 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         Button delete = (Button)findViewById(R.id.delete);
 
         if(schedule != null) { //이미 저장된 데이터
+
+            Cursor cursor = mDbHelper.getUserByTitleOfSQL(schedule);
+            cursor.moveToFirst();
+            title.setText(cursor.getString(3));
+            int startDate = Integer.parseInt(cursor.getString(4));
+            int endDate = Integer.parseInt(cursor.getString(5));
+            address.setText(cursor.getString(6));
+            memo.setText(cursor.getString(7));
+
+            startPicker.setHour(startDate);
+            endPicker.setHour(endDate);
 
             save.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
